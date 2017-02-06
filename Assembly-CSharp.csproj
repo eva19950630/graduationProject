@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\game(shared)\gameTeach_audio.cs" />
      <Compile Include="Assets\Scripts\game(shared)\game_audio.cs" />
      <Compile Include="Assets\Scripts\game_balance\GameController_balance.cs" />
+     <Compile Include="Assets\Scripts\game_balance\SecondText_balance.cs" />
      <Compile Include="Assets\Scripts\game_fishing\GameController_fishing.cs" />
      <Compile Include="Assets\Scripts\game_fishing\SecondText_fishing.cs" />
      <Compile Include="Assets\Scripts\game_fishing\TeachingController_fishing.cs" />
