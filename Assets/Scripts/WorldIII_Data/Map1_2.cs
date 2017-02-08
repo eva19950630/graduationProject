@@ -3,7 +3,7 @@ using System.Collections;
 using System.Linq;
 // using System.Collections.Generic;
 
-public class Map1_1 : MonoBehaviour {
+public class Map1_2 : MonoBehaviour {
 	//seat of character and the map
 	public int xPos, yPos;
 	public static int x_Save_Pos, y_Save_Pos;
@@ -13,7 +13,7 @@ public class Map1_1 : MonoBehaviour {
 	public int sign, count, i;
 	public static bool undo;
 	//map info
-	public static int[,] world1 = new int[7,7]
+	public static int[,] world1 = new int[8,9]
 	{
 		// ↓ X ; → Y ;
 		/*
@@ -23,18 +23,19 @@ public class Map1_1 : MonoBehaviour {
 				1		13	
 			   '0' "15"	14	
 		*/
-		{-1, -1, -1, -1, -1, -1, -1},
-		{-1, -1, -1,  0, 15, 14, -1},
-		{-1, -1, -1,  1, -1, 13, -1},
-		{-1,  4,  3,  2, -1, 12, -1},
-		{-1,  5, -1,  9, 10, 11, -1},
-		{-1,  6,  7,  8, -1, -1, -1},
-		{-1, -1, -1, -1, -1, -1, -1}
+		{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+		{-1, -1,  2,  1,  0, 25, 24, -1, -1},
+		{-1, -1,  3, -1, -1, -1, 23, -1, -1},
+		{-1,  5,  4, -1, -1, -1, 22, 21, -1},
+		{-1,  6, -1, 12, 13, 14, -1, 20, -1},
+		{-1,  7, -1, 11, -1, 15, -1, 19, -1},
+		{-1,  8,  9, 10, -1, 16, 17, 18, -1},
+		{-1, -1, -1, -1, -1, -1, -1, -1, -1}
 	};
 
 	//map game event 
-	public static int[] world1_game = new int[16]
-	{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+	public static int[] world1_game = new int[26]
+	{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 
 	//sign prefab for clone
 	public GameObject sign_prefab;
@@ -48,21 +49,32 @@ public class Map1_1 : MonoBehaviour {
 	public static Vector3[] world1_stop = new [] 
 	{
 		new Vector3(-5f,2f,-5f),
-		new Vector3(-5f,2f,0f),
-		new Vector3(-5f,2f,5f),
-		new Vector3(-10f,2f,5f),
+		new Vector3(-10f,2f,-5f),
+		new Vector3(-15f,2f,-5f),
+		new Vector3(-15f,2f,0f),
 		new Vector3(-15f,2f,5f),
-		new Vector3(-15f,2f,10f),
-		new Vector3(-15f,2f,15f),
+		new Vector3(-20f,2f,5f),
+		new Vector3(-20f,2f,10f),
+		new Vector3(-20f,2f,15f),
+		new Vector3(-20f,2f,20f),
+		new Vector3(-15f,2f,20f),
+		new Vector3(-10f,2f,20f),
 		new Vector3(-10f,2f,15f),
-		new Vector3(-5f,2f,15f),
+		new Vector3(-10f,2f,10f),
 		new Vector3(-5f,2f,10f),
 		new Vector3(0f,2f,10f),
-		new Vector3(5f,2f,10f),
+		new Vector3(0f,2f,15f),
+		new Vector3(0f,2f,20f),
+		new Vector3(5f,2f,20f),
+		new Vector3(10f,2f,20f),
+		new Vector3(10f,2f,15f),
+		new Vector3(10f,2f,10f),
+		new Vector3(10f,2f,5f),
 		new Vector3(5f,2f,5f),
 		new Vector3(5f,2f,0f),
 		new Vector3(5f,2f,-5f),
 		new Vector3(0f,2f,-5f),
+
 	};
 	//Material for change
 	public Material material_lock;
@@ -75,42 +87,63 @@ public class Map1_1 : MonoBehaviour {
 	public static Vector3[] character_position = new []
 	{
 		new Vector3(-5f,2.375f,-5f),
-		new Vector3(-5f,2.375f,0f),
-		new Vector3(-5f,2.375f,5f),
-		new Vector3(-10f,2.375f,5f),
+		new Vector3(-10f,2.375f,-5f),
+		new Vector3(-15f,2.375f,-5f),
+		new Vector3(-15f,2.375f,0f),
 		new Vector3(-15f,2.375f,5f),
-		new Vector3(-15f,2.375f,10f),
-		new Vector3(-15f,2.375f,15f),
+		new Vector3(-20f,2.375f,5f),
+		new Vector3(-20f,2.375f,10f),
+		new Vector3(-20f,2.375f,15f),
+		new Vector3(-20f,2.375f,20f),
+		new Vector3(-15f,2.375f,20f),
+		new Vector3(-10f,2.375f,20f),
 		new Vector3(-10f,2.375f,15f),
-		new Vector3(-5f,2.375f,15f),
+		new Vector3(-10f,2.375f,10f),
 		new Vector3(-5f,2.375f,10f),
 		new Vector3(0f,2.375f,10f),
-		new Vector3(5f,2.375f,10f),
+		new Vector3(0f,2.375f,15f),
+		new Vector3(0f,2.375f,20f),
+		new Vector3(5f,2.375f,20f),
+		new Vector3(10f,2.375f,20f),
+		new Vector3(10f,2.375f,15f),
+		new Vector3(10f,2.375f,10f),
+		new Vector3(10f,2.375f,5f),
 		new Vector3(5f,2.375f,5f),
 		new Vector3(5f,2.375f,0f),
 		new Vector3(5f,2.375f,-5f),
 		new Vector3(0f,2.375f,-5f),
+
 	};
 	//camera position
 	public static Vector3[] camera_position = new []
 	{
 		new Vector3(3f, 15f, -29f),
-		new Vector3(3f, 15f, -24f),
-		new Vector3(3f, 15f, -19f),
-		new Vector3(-2f, 15f, -19f),
+		new Vector3(-2f, 15f, -29f),
+		new Vector3(-7f, 15f, -29f),
+		new Vector3(-7f, 15f, -24f),
 		new Vector3(-7f, 15f, -19f),
-		new Vector3(-7f, 15f, -14f),
-		new Vector3(-7f, 15f, -9f),
+		new Vector3(-12f, 15f, -19f),
+		new Vector3(-12f, 15f, -14f),
+		new Vector3(-12f, 15f, -9f),
+		new Vector3(-12f, 15f, -4f),
+		new Vector3(-7f, 15f, -4f),
+		new Vector3(-2f, 15f, -4f),
 		new Vector3(-2f, 15f, -9f),
-		new Vector3(3f, 15f, -9f),
+		new Vector3(-2f, 15f, -14f),
 		new Vector3(3f, 15f, -14f),
 		new Vector3(8f, 15f, -14f),
-		new Vector3(13f, 15f, -14f),
+		new Vector3(8f, 15f, -9f),
+		new Vector3(8f, 15f, -4f),
+		new Vector3(13f, 15f, -4f),
+		new Vector3(18f, 15f, -4f),
+		new Vector3(18f, 15f, -9f),
+		new Vector3(18f, 15f, -14f),
+		new Vector3(18f, 15f, -19f),
 		new Vector3(13f, 15f, -19f),
 		new Vector3(13f, 15f, -24f),
 		new Vector3(13f, 15f, -29f),
-		new Vector3(8f, 15f, -14f),
-
+		new Vector3(8f, 15f, -29f)
+		
 	};
 	//clue
 	public static string[] clue = new string[10]
@@ -154,17 +187,17 @@ public class Map1_1 : MonoBehaviour {
 		clue[9] = "鼻子";
 
 
-		for(i = 0; i < 16; i++){
+		for(i = 0; i < 26; i++){
 			world1_game[i] = -1;
 		}
 
 		x_Save_Pos = 1;
-		y_Save_Pos = 3;
+		y_Save_Pos = 4;
 		now_Save_Pos = 0;
 
 		count = 0;
 		while(count > 0){
-			sign = Random.Range(1,15);
+			sign = Random.Range(1,25);
 			if(world1_game[sign] == -1){
 				world1_game[sign] = 1;
 				count --;
@@ -173,7 +206,7 @@ public class Map1_1 : MonoBehaviour {
 
 		count = 0;
 		while(count > 0){
-			sign = Random.Range(1,15);
+			sign = Random.Range(1,25);
 			if(world1_game[sign] == -1){
 				world1_game[sign] = 2;
 				count --;
@@ -181,7 +214,7 @@ public class Map1_1 : MonoBehaviour {
 		}
 		count = 0;
 		while(count > 0){
-			sign = Random.Range(1,15);
+			sign = Random.Range(1,25);
 			if(world1_game[sign] == -1){
 				world1_game[sign] = 3;
 				count --;
@@ -194,11 +227,11 @@ public class Map1_1 : MonoBehaviour {
 	void Update () {
 
 		//save for the start get next time
-		if(gameventII.save == true){
+		if(gameventIII.save == true){
 			//get now state
-			xPos = gameventII.xMap;
-			yPos = gameventII.yMap;
-			now_Pos = gameventII.now;
+			xPos = gameventIII.xMap;
+			yPos = gameventIII.yMap;
+			now_Pos = gameventIII.now;
 			//change the data source
 			x_Save_Pos = xPos;
 			y_Save_Pos = yPos;
@@ -218,7 +251,7 @@ public class Map1_1 : MonoBehaviour {
 	public void Clone(){
 		world1_floor = GameObject.FindGameObjectsWithTag("floor").OrderBy( go => go.name ).ToArray();
 		undo = false;
-		for(i = 0; i <= 15; i++){
+		for(i = 0; i <= 25; i++){
 			//print(i + ":" + world1_game[i]);
 			if(world1_game[i] != -1){
 				signClone = Instantiate(sign_prefab, world1_stop[i], Quaternion.identity) as GameObject;

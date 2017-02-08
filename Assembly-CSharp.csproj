@@ -58,6 +58,9 @@
      <Compile Include="Assets\Scripts\Chapter\selectCh.cs" />
      <Compile Include="Assets\Scripts\LoadBG.cs" />
      <Compile Include="Assets\Scripts\ScreenSizeMatch.cs" />
+     <Compile Include="Assets\Scripts\WorldIII_Data\Map1_2.cs" />
+     <Compile Include="Assets\Scripts\WorldIII_Data\gameventIII.cs" />
+     <Compile Include="Assets\Scripts\WorldIII_Data\savedataIII.cs" />
      <Compile Include="Assets\Scripts\WorldII_Data\Map1_1.cs" />
      <Compile Include="Assets\Scripts\WorldII_Data\gameventII.cs" />
      <Compile Include="Assets\Scripts\WorldII_Data\savedataII.cs" />

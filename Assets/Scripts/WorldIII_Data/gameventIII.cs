@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class gameventII : MonoBehaviour {
+public class gameventIII : MonoBehaviour {
 
 //character & camera
 	public GameObject cam;
@@ -70,25 +70,25 @@ public class gameventII : MonoBehaviour {
 		wrongPanel.SetActive(false);
 
 		//get save data
-		xMap = Map1_1.x_Save_Pos;
-		yMap = Map1_1.y_Save_Pos;
-		now = Map1_1.now_Save_Pos;
+		xMap = Map1_2.x_Save_Pos;
+		yMap = Map1_2.y_Save_Pos;
+		now = Map1_2.now_Save_Pos;
 		speed = 0f;
 		//place character and camera
-		xC = Map1_1.character_position[now].x;
-		xCam = Map1_1.camera_position[now].x;
-		zC = Map1_1.character_position[now].z;
-		zCam = Map1_1.camera_position[now].z;
+		xC = Map1_2.character_position[now].x;
+		xCam = Map1_2.camera_position[now].x;
+		zC = Map1_2.character_position[now].z;
+		zCam = Map1_2.camera_position[now].z;
 		//initial target as now position
-		character.transform.position = Map1_1.character_position[now];
-		cam_place.transform.position = Map1_1.camera_position[now];		
+		character.transform.position = Map1_2.character_position[now];
+		cam_place.transform.position = Map1_2.camera_position[now];		
 		
 		target = character.transform.position;
 		target_cam = cam_place.transform.position;
 
 		//world_finish initial
 		world_finish = false;
-		Map1_1.undo_change();
+		Map1_2.undo_change();
 		//comeback
 		//load the little game
 		// async_lock = SceneManager.LoadSceneAsync("lockpassword");
@@ -96,11 +96,11 @@ public class gameventII : MonoBehaviour {
 		//async_fish = SceneManager.LoadSceneAsync("FishingScene");
 		//async_fish.allowSceneActivation = false;
 		save = false;
-		// Map1_1.reClone();
+		// Map1_2.reClone();
 		// print("xC = " + xC + "zC = " + zC + "now = " + now);
 		Dice.SetActive(false);
 
-		if(Map1_1.promptShow)
+		if(Map1_2.promptShow)
 			GetCluePrompt.SetActive(true);
 		else
 			GetCluePrompt.SetActive(false);
@@ -133,14 +133,14 @@ public class gameventII : MonoBehaviour {
 			//D.SetInteger("direction", 0);
 			D.Play("DiGoReady");
 			//async.allowSceneActivation = true;
-			if(Map1_1.world1_game[now]!= -1)
+			if(Map1_2.world1_game[now]!= -1)
 				entergame();
 			else{
 				throwButton.SetActive(true);
 				throwdice = false;
 			}
 		}else{
-			if(Map1_1.world1[xMap,yMap+1] == now+1){
+			if(Map1_2.world1[xMap,yMap+1] == now+1){
 				//D.SetInteger("direction", 2);
 				D.Play("DiGoRight");
 	   			xC+=5f;
@@ -154,7 +154,7 @@ public class gameventII : MonoBehaviour {
 				yMap++;	
 				now++;
 	   			p--;
-	   		}else if(Map1_1.world1[xMap,yMap-1] == now+1){
+	   		}else if(Map1_2.world1[xMap,yMap-1] == now+1){
  				//D.SetInteger("direction", 4);
  				D.Play("DiGoLeft");
  				xC-=5f;
@@ -168,7 +168,7 @@ public class gameventII : MonoBehaviour {
     			yMap--;
     			now++;
   	  			p--;
-    		}else if(Map1_1.world1[xMap+1,yMap] == now+1){
+    		}else if(Map1_2.world1[xMap+1,yMap] == now+1){
     			//D.SetInteger("direction", 1);
     			D.Play("DiGoUp");
    				zC +=5f;
@@ -182,7 +182,7 @@ public class gameventII : MonoBehaviour {
    		 		xMap++;
     			now++;
     			p--;
-		   	}else if(Map1_1.world1[xMap-1,yMap] == now+1){
+		   	}else if(Map1_2.world1[xMap-1,yMap] == now+1){
    				//D.SetInteger("direction", 3);
    				D.Play("DiGoDown");
    				zC -=5f;
@@ -208,7 +208,7 @@ public class gameventII : MonoBehaviour {
 	public void tryAns(){
 		choose_panel.SetActive(false);	
 		pass_panel.SetActive(true);
-		clue_num.text = Map1_1.ans_cluenum;
+		clue_num.text = Map1_2.ans_cluenum;
 	}
 
 	public void getClue(){
@@ -223,7 +223,7 @@ public class gameventII : MonoBehaviour {
 	}
 
 	public void checkAns(){
-		if(Map1_1.answer == ans_choosed){
+		if(Map1_2.answer == ans_choosed){
 			// show correct image
 			Debug.Log("correct ans!");
 			world_finish = true;
@@ -254,7 +254,7 @@ public class gameventII : MonoBehaviour {
 		zCam = cam_place.transform.position.z;
 
 		xMap = 1;
-		yMap = 3;
+		yMap = 4;
 		now = 0;
 		p = 0;
 
@@ -285,7 +285,7 @@ public class gameventII : MonoBehaviour {
     public void turn(){
 
     	//gamevent.p = 2;
-    	p = 10; //Random.Range(1,4);
+    	p = Random.Range(1,4);
 		Dice.SetActive(true);
 		Dice.transform.position = character.transform.position + new  Vector3(0f,-1f,-2.5f);//(-2.7f,1f,-7.5f);
 		diceAni.SetBool("setPosi",true);
@@ -302,13 +302,13 @@ public class gameventII : MonoBehaviour {
     		diceAni.Play("roll-3");
     	}
     	//entergame(now + p);
-    	Debug.Log(gameventII.p);
+    	Debug.Log(gameventIII.p);
     }
 
     IEnumerator waitingDice () {
     	yield return new WaitForSeconds(2f);
     	
-    	savedataII.newround();
+    	savedataIII.newround();
     	throwdice = true;
 
     }
@@ -316,9 +316,9 @@ public class gameventII : MonoBehaviour {
     private void entergame(){
     	//Application.runInBackground = true;
     	save = true;
-    	if(!savedataII.gameEntered){
-	    	savedataII.entergame();
-	    	switch(Map1_1.world1_game[now]){
+    	if(!savedataIII.gameEntered){
+	    	savedataIII.entergame();
+	    	switch(Map1_2.world1_game[now]){
 	    		case 1:
 	    			// async_lock.allowSceneActivation = true;
 	    			SceneManager.LoadScene("lockpassword");
@@ -340,8 +340,8 @@ public class gameventII : MonoBehaviour {
     }
 
     public void showclue(){
-    	clue_L.text = Map1_1.cluelist_L;
-    	clue_R.text = Map1_1.cluelist_R;
+    	clue_L.text = Map1_2.cluelist_L;
+    	clue_R.text = Map1_2.cluelist_R;
     	if(open_clue){
     		clue_panel.SetActive(false);
     		open_clue = false;	
@@ -369,7 +369,7 @@ public class gameventII : MonoBehaviour {
 
     public void closePrompt(){
     	GetCluePrompt.SetActive(false);
-    	Map1_1.showPrompt_clue();
+    	Map1_2.showPrompt_clue();
     }
 
     public void GameEnd(int ans){
