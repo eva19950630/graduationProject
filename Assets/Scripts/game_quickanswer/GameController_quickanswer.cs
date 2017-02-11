@@ -19,9 +19,9 @@ public class GameController_quickanswer : MonoBehaviour {
 	private string Ans, user_ans, ques_id, questions;
 	private string[] wrongID_arr = new string[3];
 	private string[] wrongQues_arr = new string[3];
-	public static bool rotate_paper = false, isAnsFiveTimes = false;
 	private bool[] isClickNum = new bool[4];
 
+	public static bool rotate_paper = false, isAnsFiveTimes = false;
 	public static int c = 0, k = 0;
 	public static bool gamestate = true;
 	public static bool isRight = false;
