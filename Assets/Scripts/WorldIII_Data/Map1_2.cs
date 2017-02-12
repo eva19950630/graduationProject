@@ -195,7 +195,7 @@ public class Map1_2 : MonoBehaviour {
 		y_Save_Pos = 4;
 		now_Save_Pos = 0;
 
-		count = 0;
+		count = 10;
 		while(count > 0){
 			sign = Random.Range(1,25);
 			if(world1_game[sign] == -1){

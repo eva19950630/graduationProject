@@ -13,8 +13,12 @@ public class w_audio : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//worldBGM.Play();
-
-		play_music = Map1_0.music_stat;
+		if(GameObject.Find("datasaver"))
+			play_music = Map1_0.music_stat;
+		else if(GameObject.Find("datasaverII"))
+			play_music = Map1_1.music_stat;
+		else if(GameObject.Find("datasaverIII"))
+			play_music = Map1_2.music_stat;
 		audio_play();
 	}
 	

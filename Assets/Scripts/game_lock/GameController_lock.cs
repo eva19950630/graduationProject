@@ -192,13 +192,25 @@ public class GameController_lock : MonoBehaviour {
 		if (isRight) {
 			yield return new WaitForSeconds(3f);
 			isRight = false;
-			Map1_0.getclue();
+			if(GameObject.Find("datasaver"))
+				Map1_0.getclue();
+			else if(GameObject.Find("datasaverII"))
+				Map1_1.getclue();
+			else
+				Map1_2.getclue();
 			if(isboss){
 				BossSave.setDamage();
 				SceneManager.LoadScene("BossStage");
+			}else{
+				if(GameObject.Find("datasaver"))
+					SceneManager.LoadScene("Chapter_WorldOne");
+				else if(GameObject.Find("datasaverII"))
+					SceneManager.LoadScene("Chapter_WorldTwo");
+				else
+					SceneManager.LoadScene("Chapter_WorldThree");		
 			}
-			else 
-				SceneManager.LoadScene("Chapter_WorldOne");
+
+
 		}
 		else if (k == 3) {
 			if (isboss)

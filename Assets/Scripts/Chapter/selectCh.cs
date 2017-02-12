@@ -17,6 +17,7 @@ public class selectCh : MonoBehaviour {
 
 	//move pig
 	public GameObject player;
+
 	// public bool mfinish;
 
 	//world button
@@ -95,6 +96,7 @@ public class selectCh : MonoBehaviour {
 
 	public void chooseWorld(string name){	
 		txtPaneln.text = name;
+
 	}
 
 	public void chooseW(int wNum){
@@ -116,7 +118,11 @@ public class selectCh : MonoBehaviour {
 		panelImage.SetActive(false);
 		loadingImage.SetActive (true);
 		if(wSel == 4)
-			StartCoroutine (LoadAndBar ("BossStage"));	
+			StartCoroutine (LoadAndBar ("BossStage"));
+		else if(wSel == 3)
+			StartCoroutine (LoadAndBar ("Chapter_WorldThree"));
+		else if(wSel == 2)
+			StartCoroutine (LoadAndBar ("Chapter_WorldTwo"));
 		else
 			StartCoroutine (LoadAndBar ("Chapter_WorldOne"));
 	}
