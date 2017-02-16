@@ -8,7 +8,7 @@ public class SecondText_balance : MonoBehaviour {
 	public GameObject secText, label2, wrongsymbol, feedbackPanel, finishBtn;
 	public float ti = 0;
 	public int a = 0;
-	public Animator clockAni;
+	public Animator clockAni, feedbackAni;
 
 	// Use this for initialization
 	void Start () {
@@ -35,9 +35,8 @@ public class SecondText_balance : MonoBehaviour {
 				label2.SetActive(false);
 				finishBtn.SetActive(false);
 				clockAni.enabled = false;
-				
-				// feedbackPanel.SetActive(true);
-				// feedbackAni.Play("quickanswer_timesup");
+				feedbackPanel.SetActive(true);
+				feedbackAni.Play("quickanswer_timesup");
 			}
 			if (ti <= -152) {
 				

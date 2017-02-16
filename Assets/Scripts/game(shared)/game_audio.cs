@@ -39,7 +39,8 @@ public class game_audio : MonoBehaviour {
 	}
 	
 	public void playWrongSound () {
-		if(!(GameController_lock.isRight || GameController_fishing.isRight || GameController_quickanswer.isRight))
+		if(!(GameController_lock.isRight || GameController_fishing.isRight || GameController_quickanswer.isRight ||
+			 GameController_balance.isRight))
 			wrongSound.Play();
 		else
 			rightSound.Play();
