@@ -209,8 +209,6 @@ public class GameController_lock : MonoBehaviour {
 				else
 					SceneManager.LoadScene("Chapter_WorldThree");		
 			}
-
-
 		}
 		else if (k == 3) {
 			if (isboss)

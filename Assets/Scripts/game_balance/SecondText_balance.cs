@@ -17,27 +17,38 @@ public class SecondText_balance : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		ti -= Time.deltaTime;
-		a = (int)ti + 150;
-		sec.text = ""+ a;
-		clockAni.enabled = true;
-		if (ti <= -141) {
-			sec.text = "0" + ""+ a;
-			sec.color = Color.red;
-			clockAni.Play ("clock_quick");
-		}
-		if (ti <= -150) {
-			wrongsymbol.SetActive(false);
-			secText.SetActive(false);
-			label2.SetActive(false);
-			finishBtn.SetActive(false);
+		bool gamestate = GameController_balance.gamestate;
+
+		if (gamestate == true) {
+			ti -= Time.deltaTime;
+			a = (int)ti + 150;
+			sec.text = ""+ a;
+			clockAni.enabled = true;
+			if (ti <= -141) {
+				sec.text = "0" + ""+ a;
+				sec.color = Color.red;
+				clockAni.Play ("clock_quick");
+			}
+			if (ti <= -150) {
+				wrongsymbol.SetActive(false);
+				secText.SetActive(false);
+				label2.SetActive(false);
+				finishBtn.SetActive(false);
+				clockAni.enabled = false;
+				
+				// feedbackPanel.SetActive(true);
+				// feedbackAni.Play("quickanswer_timesup");
+			}
+			if (ti <= -152) {
+				
+			}
+		} else {
+			if (ti <= -141)
+				sec.text = "0" + ""+ a;
+			else
+				sec.text = ""+ a;
+			
 			clockAni.enabled = false;
-			
-			// feedbackPanel.SetActive(true);
-			// feedbackAni.Play("quickanswer_timesup");
-		}
-		if (ti <= -152) {
-			
 		}
 	}
 }

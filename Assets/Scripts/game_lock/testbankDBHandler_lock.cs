@@ -45,7 +45,7 @@ public class testbankDBHandler_lock : MonoBehaviour {
 		Ans = str_arr[3];
 		hint = str_arr[4];
 
-/*PRINT Fishing info*/		
+/*PRINT Lock info*/		
 		//Debug.Log("Lock INFO: " + "ques_id: " + ques_id + " / Ans: " + Ans + " / hint: " + hint);
 
 	}

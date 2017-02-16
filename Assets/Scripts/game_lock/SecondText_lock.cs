@@ -22,7 +22,8 @@ public class SecondText_lock : MonoBehaviour {
 	void Update () {
 		bool gamestate = GameController_lock.gamestate;
 		string ques_id = testbankDBHandler_lock.ques_id;
-		if(isboss){
+
+		if (isboss) {
 			if (gamestate == true) {
 				ti -= Time.deltaTime;
 				a = (int)ti + 60;
@@ -61,7 +62,7 @@ public class SecondText_lock : MonoBehaviour {
 				
 				bombAni.enabled = false;
 			}
-		}else{
+		} else {
 			if (gamestate == true) {
 				ti -= Time.deltaTime;
 				a = (int)ti + 120;
