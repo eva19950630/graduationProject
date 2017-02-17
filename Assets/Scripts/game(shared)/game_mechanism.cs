@@ -63,7 +63,10 @@ public class game_mechanism : MonoBehaviour {
 		} else if (gid == 4) {
 			qid = System.Convert.ToInt32(testbankDBHandler_balance.ques_id);
 			qkind = testbankDBHandler_balance.ques_kind;
-		}
+		} else if (gid == 5) {
+			qid = System.Convert.ToInt32(testbankDBHandler_buying.ques_id);
+			qkind = testbankDBHandler_buying.ques_kind;
+		} 
 
 		print("[Game] gid:" + gid + " / qid:" + qid + " / qkind:" + qkind);
 

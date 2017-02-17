@@ -79,6 +79,7 @@
      <Compile Include="Assets\Scripts\game_balance\testbankDBHandler_balance.cs" />
      <Compile Include="Assets\Scripts\game_buying\GameController_buying.cs" />
      <Compile Include="Assets\Scripts\game_buying\SecondText_buying.cs" />
+     <Compile Include="Assets\Scripts\game_buying\testbankDBHandler_buying.cs" />
      <Compile Include="Assets\Scripts\game_fishing\GameController_fishing.cs" />
      <Compile Include="Assets\Scripts\game_fishing\SecondText_fishing.cs" />
      <Compile Include="Assets\Scripts\game_fishing\testbankDBHandler_fishing.cs" />

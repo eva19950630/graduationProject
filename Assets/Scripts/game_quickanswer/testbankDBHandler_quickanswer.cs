@@ -4,9 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class testbankDBHandler_quickanswer : MonoBehaviour {
-	public string strurl = "http://163.21.245.190/graduationProject/num_showques(quickanswer).php";
+	public string strurl;
+
 	public Text QuesText;
 	public Text[] selectAnsText = new Text[4];
+	
 	public string[] str_arr, str_arr2;
 	public List<string> ques_list = new List<string>();
 	public int c = 0;
@@ -16,6 +18,8 @@ public class testbankDBHandler_quickanswer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		strurl = "http://163.21.245.190/graduationProject/numQues(quickanswer).php";
+
 		ques_list.Clear();
 		for (int i = 0; i < str_arr.Length; i++)
 			str_arr[i] = "";
@@ -26,7 +30,6 @@ public class testbankDBHandler_quickanswer : MonoBehaviour {
 		recallRanQues = false;
 
 		StartCoroutine("RanQuestion");
-		
 	}
 	
 	// Update is called once per frame

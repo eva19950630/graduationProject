@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class testbankDBHandler_balance : MonoBehaviour {
+public class testbankDBHandler_buying : MonoBehaviour {
 	public string strurl;
 
 	public Text QuesText;
@@ -50,8 +50,8 @@ public class testbankDBHandler_balance : MonoBehaviour {
 		Ans = str_arr[3];
 		hint = str_arr[4];
 
-/*PRINT Balance info*/
-		// Debug.Log("Balance INFO: " + "ques_id: " + ques_id + " / ques_kind: " + ques_kind + " / Ans: " + Ans + " / hint: " + hint);
+/*PRINT Buying info*/
+		Debug.Log("Buying INFO: " + "ques_id: " + ques_id + " / ques_kind: " + ques_kind + " / Ans: " + Ans + " / hint: " + hint);
 
 	}
 }
