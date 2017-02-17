@@ -8,7 +8,7 @@ public class testbankDBHandler_lock : MonoBehaviour {
 	public Text QuesText;
 	public string[] str_arr;
 
-	public static string ques_id, questions, Ans, hint;
+	public static string ques_id, ques_kind, Ans, hint;
 
 	// Use this for initialization
 	void Start () {
@@ -40,7 +40,7 @@ public class testbankDBHandler_lock : MonoBehaviour {
 		str_arr = str.Split('@');
 
 		ques_id = str_arr[0];
-		questions = str_arr[1];
+		ques_kind = str_arr[1];
 		QuesText.text = str_arr[2];
 		Ans = str_arr[3];
 		hint = str_arr[4];

@@ -11,7 +11,7 @@ public class testbankDBHandler_quickanswer : MonoBehaviour {
 	public List<string> ques_list = new List<string>();
 	public int c = 0;
 
-	public static string ques_id, questions, Ans;
+	public static string ques_id, ques_kind, Ans;
 	public static bool recallRanQues;
 
 	// Use this for initialization
@@ -93,7 +93,7 @@ public class testbankDBHandler_quickanswer : MonoBehaviour {
 		}
 
 		ques_id = str_arr2[0];
-		questions = str_arr2[1];
+		ques_kind = str_arr2[1];
 		QuesText.text = str_arr2[2];
 		Ans = str_arr2[3];
 		

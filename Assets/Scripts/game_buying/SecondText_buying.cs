@@ -6,13 +6,17 @@ using UnityEngine.UI;
 public class SecondText_buying : MonoBehaviour {
 	public Text sec;
 	public GameObject secText, label2, wrongsymbol, feedbackPanel, finishBtn;
+	public Animator clockAni;
+
 	public float ti = 0;
 	public int a = 0;
-	public Animator clockAni;
+
+	private int gid;
 
 	// Use this for initialization
 	void Start () {
-		
+		gid = GameController_buying.gID;
+
 	}
 	
 	// Update is called once per frame

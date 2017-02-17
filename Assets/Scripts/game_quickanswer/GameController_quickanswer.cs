@@ -16,17 +16,17 @@ public class GameController_quickanswer : MonoBehaviour {
 	public Sprite[] wrong_fillred = new Sprite[3];
 	public Animator feedbackAni;
 	
-	private string Ans, user_ans, ques_id, questions;
+	private string Ans, user_ans, ques_id, ques_kind;
 	private string[] wrongID_arr = new string[3];
 	private string[] wrongQues_arr = new string[3];
 	private bool[] isClickNum = new bool[4];
 
 	public static bool rotate_paper = false, isAnsFiveTimes = false;
-	public static int c = 0, k = 0;
+	public static int c, k, gID, qID;
 	public static bool gamestate = true;
 	public static bool isRight = false;
 	public static string wrongID, wrongQues;
-	//public Button finishBtn;
+
 	//check boss or normal world
 	public bool isboss = false;
 
@@ -34,6 +34,7 @@ public class GameController_quickanswer : MonoBehaviour {
 	void Start () {
 		if(GameObject.Find("BossSaveData"))
 			isboss = true;
+		
 		c = 0;
 		k = 0;
 		gamestate = false;
@@ -41,15 +42,16 @@ public class GameController_quickanswer : MonoBehaviour {
 		isAnsFiveTimes = false;
 		wrongID = "";
 		wrongQues = "";
-		//finishBtn.onClick.AddListener(checkAnswer);
+		qID = 0;
+		
+		gID = 3;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
 		Ans = testbankDBHandler_quickanswer.Ans;
 		ques_id = testbankDBHandler_quickanswer.ques_id;
-		questions = testbankDBHandler_quickanswer.questions;
+		ques_kind = testbankDBHandler_quickanswer.ques_kind;
 
 		if(Input.GetKeyDown(KeyCode.Escape))
 			Application.Quit();
@@ -91,7 +93,7 @@ public class GameController_quickanswer : MonoBehaviour {
 	public void checkAnswer () {
 		
 		c++;
-		Debug.Log("Click times: " + c + " / ques_id: " + ques_id + " / questions: " + questions + " / user_ans: " + user_ans + " / Ans: " + Ans);
+		Debug.Log("Click times: " + c + " / ques_id: " + ques_id + " / ques_kind: " + ques_kind + " / user_ans: " + user_ans + " / Ans: " + Ans);
 
 		gamestate = false;
 
@@ -113,17 +115,17 @@ public class GameController_quickanswer : MonoBehaviour {
 			if (k == 0) {		
 				mainren_wrong1.sprite = wrong_fillred[0];
 				wrongID_arr[0] = ques_id;
-				wrongQues_arr[0] = questions;
+				wrongQues_arr[0] = ques_kind;
 				// print(wrongID_arr[0]);
 			} else if (k == 1) {
 				mainren_wrong2.sprite = wrong_fillred[1];
 				wrongID_arr[1] = ques_id;
-				wrongQues_arr[1] = questions;
+				wrongQues_arr[1] = ques_kind;
 				// print(wrongID_arr[1]);
 			} else {
 				mainren_wrong3.sprite = wrong_fillred[2];
 				wrongID_arr[2] = ques_id;
-				wrongQues_arr[2] = questions;
+				wrongQues_arr[2] = ques_kind;
 				// print(wrongID_arr[2]);
 				gamestate = false;
 			}
@@ -176,18 +178,14 @@ public class GameController_quickanswer : MonoBehaviour {
 				gamestate = false;
 				int r = Random.Range(0, 3);
 				wrongID = wrongID_arr[r];
+				qID = System.Convert.ToInt32(wrongID);
 				wrongQues = wrongQues_arr[r];
+				
 				if(isboss)
 					BossSave.setDamage();
-				
-				if (wrongID == "3" || wrongID == "5" || wrongID == "6" || wrongID == "12")
-					SceneManager.LoadScene("num_TeacherScene_quickanswer");
-				else if (wrongID == "29" || wrongID == "32" || wrongID == "37" || wrongID == "45")
-					SceneManager.LoadScene("num_TeacherScene_quickanswer_2");
-				else if (wrongID == "46" || wrongID == "47" || wrongID == "48" || wrongID == "66")
-					SceneManager.LoadScene("num_TeacherScene_quickanswer_3");
-				
-				yield return new WaitForSeconds(0.5f);
+
+				yield return new WaitForSeconds(1f);
+				game_mechanism.enterTeaching(gID);
 			}
 		}	
 				
@@ -196,10 +194,10 @@ public class GameController_quickanswer : MonoBehaviour {
 	IEnumerator showFeedbackPanel () {
 		gamestate = false;
 		yield return new WaitForSeconds(1.8f);
-		if(isboss){
+		if (isboss) {
 			BossSave.setDamage();
 			SceneManager.LoadScene("BossStage");
-		}else{
+		} else {
 			if(GameObject.Find("datasaver"))
 				SceneManager.LoadScene("Chapter_WorldOne");
 			else if(GameObject.Find("datasaverII"))

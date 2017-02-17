@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Teaching(should modify)/TeachingScene1.unity
+- path: Assets/Scenes/Game/BuyingScene.unity
   isLoaded: 1
   isActive: 1

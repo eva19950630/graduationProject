@@ -14,10 +14,10 @@ public class GameController_balance : MonoBehaviour {
 
 	private bool showPanel = false;
 	private int weight_num1 = 0, weight_num2 = 0, weight_num3 = 0, weight_num4 = 0, user_Ans, ans_int;
-	private string ques_id, Ans, hint;
+	private string Ans, hint;
 
 	public static bool gamestate, isRight, isboss;
-	public static int k, game_id;
+	public static int k, gID;
 
 	// Use this for initialization
 	void Start () {
@@ -27,10 +27,12 @@ public class GameController_balance : MonoBehaviour {
 		gamestate = false;
 		isRight = false;
 		k = 0;
+
+		gID = 4;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () {		
 		// ques_id = testbankDBHandler_balance.ques_id;
 		Ans = testbankDBHandler_balance.Ans;
 		hint = testbankDBHandler_balance.hint;
@@ -168,20 +170,13 @@ public class GameController_balance : MonoBehaviour {
 				else
 					SceneManager.LoadScene("Chapter_WorldThree");		
 			}
-		}
-		else if (k == 3) {
-			// if (isboss)
-			// 	BossSave.setDamage();
+		} else if (k == 3) {
+			if (isboss)
+				BossSave.setDamage();
 
-			game_id = 4;
-			// if (ques_id == "3" || ques_id == "5" || ques_id == "6" || ques_id == "12")
-			// 	SceneManager.LoadScene("TeacherScene_lock");
-			// else if (ques_id == "29" || ques_id == "32" || ques_id == "37" || ques_id == "45")
-			// 	SceneManager.LoadScene("TeacherScene_lock_2");
-			// else if (ques_id == "46" || ques_id == "47" || ques_id == "48" || ques_id == "66")
-			// 	SceneManager.LoadScene("TeacherScene_lock_3");
-				
-			// yield return new WaitForSeconds(0.5f);	
+			yield return new WaitForSeconds(1f);
+			game_mechanism.enterTeaching(gID);
+
 		} else {
 			yield return new WaitForSeconds(1f);
 			stepHint ();
