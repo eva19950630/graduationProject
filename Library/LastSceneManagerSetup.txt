@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/game_balance/BalanceScene.unity
+- path: Assets/Scenes/Teaching(should modify)/TeachingScene1.unity
   isLoaded: 1
   isActive: 1

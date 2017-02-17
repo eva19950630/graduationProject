@@ -2,20 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController_balance : MonoBehaviour {
-	public Text weight1000g_Text, weight100g_Text, weight10g_Text, weight1g_Text, hintText;
-	public GameObject feedbackPanel, wrongPanel, startPanel, finishBtn;
+	public Text weight1000g_Text, weight500g_Text, weight10g_Text, weight1g_Text, hintText;
 	public Sprite[] wrong_fillred = new Sprite[3];
-	public Sprite[] balanceSprite = new Sprite[2];
+	public Sprite[] balanceSprite = new Sprite[3];
 	public SpriteRenderer mainren_wrong1, mainren_wrong2, mainren_wrong3, mainren_balance;
+	public GameObject feedbackPanel, wrongPanel, startPanel, finishBtn;
+	public Animator feedbackAni;
 
 	private bool showPanel = false;
 	private int weight_num1 = 0, weight_num2 = 0, weight_num3 = 0, weight_num4 = 0, user_Ans, ans_int;
 	private string ques_id, Ans, hint;
 
 	public static bool gamestate, isRight, isboss;
-	public static int k;
+	public static int k, game_id;
 
 	// Use this for initialization
 	void Start () {
@@ -58,7 +60,7 @@ public class GameController_balance : MonoBehaviour {
 			else
 				weight_num2 = 0;
 			// print("weight_num2: " + weight_num2);
-			weight100g_Text.text = ""+weight_num2;
+			weight500g_Text.text = ""+weight_num2;
 		} else if (weightbtnName == "weightbtn_10g") {
 			if (weight_num3 < 50)
 				weight_num3++;
@@ -75,6 +77,18 @@ public class GameController_balance : MonoBehaviour {
 			weight1g_Text.text = ""+weight_num4;
 		}
 
+	}
+
+/*Click reset btn and reset all weights number*/
+	public void clickResetBtn () {
+		weight_num1 = 0;
+		weight_num2 = 0;
+		weight_num3 = 0;
+		weight_num4 = 0;
+		weight1000g_Text.text = ""+weight_num1;
+		weight500g_Text.text = ""+weight_num2;
+		weight10g_Text.text = ""+weight_num3;
+		weight1g_Text.text = ""+weight_num4;
 	}
 
 /*Check user answer and compare Ans*/
@@ -102,11 +116,25 @@ public class GameController_balance : MonoBehaviour {
 		}
 
 		if (isRight)
-			// answerRight ();
-			print("right");
+			answerRight ();
 		else
 			answerWrong ();
 
+	}
+
+	void answerRight () {
+		gamestate = false;
+
+		feedbackPanel.SetActive(true);
+		feedbackAni.Play("balance_right");
+
+		showPanel = true;
+		isRight = true;	
+
+		if (showPanel) {		
+			StartCoroutine(waitingPanel());		
+			showPanel = false;
+		}
 	}
 
 	void answerWrong () {
@@ -121,30 +149,31 @@ public class GameController_balance : MonoBehaviour {
 
 	IEnumerator waitingPanel () {		
 		if (isRight) {
-			// yield return new WaitForSeconds(3f);
-			// isRight = false;
-			// if(GameObject.Find("datasaver"))
-			// 	Map1_0.getclue();
-			// else if(GameObject.Find("datasaverII"))
-			// 	Map1_1.getclue();
-			// else
-			// 	Map1_2.getclue();
-			// if(isboss){
-			// 	BossSave.setDamage();
-			// 	SceneManager.LoadScene("BossStage");
-			// }else{
-			// 	if(GameObject.Find("datasaver"))
-			// 		SceneManager.LoadScene("Chapter_WorldOne");
-			// 	else if(GameObject.Find("datasaverII"))
-			// 		SceneManager.LoadScene("Chapter_WorldTwo");
-			// 	else
-			// 		SceneManager.LoadScene("Chapter_WorldThree");		
-			// }
+			yield return new WaitForSeconds(3f);
+			isRight = false;
+			if(GameObject.Find("datasaver"))
+				Map1_0.getclue();
+			else if(GameObject.Find("datasaverII"))
+				Map1_1.getclue();
+			else
+				Map1_2.getclue();
+			if(isboss){
+				BossSave.setDamage();
+				SceneManager.LoadScene("BossStage");
+			}else{
+				if(GameObject.Find("datasaver"))
+					SceneManager.LoadScene("Chapter_WorldOne");
+				else if(GameObject.Find("datasaverII"))
+					SceneManager.LoadScene("Chapter_WorldTwo");
+				else
+					SceneManager.LoadScene("Chapter_WorldThree");		
+			}
 		}
 		else if (k == 3) {
 			// if (isboss)
 			// 	BossSave.setDamage();
 
+			game_id = 4;
 			// if (ques_id == "3" || ques_id == "5" || ques_id == "6" || ques_id == "12")
 			// 	SceneManager.LoadScene("TeacherScene_lock");
 			// else if (ques_id == "29" || ques_id == "32" || ques_id == "37" || ques_id == "45")
@@ -175,10 +204,15 @@ public class GameController_balance : MonoBehaviour {
 	}
 
 	void isBalance () {
-		if (ans_int > user_Ans)
-			mainren_balance.sprite = balanceSprite[0];
-		else
-			mainren_balance.sprite = balanceSprite[1];
+		if (ans_int > user_Ans) {
+			if (user_Ans == 0) 
+				mainren_balance.sprite = balanceSprite[0];
+			else
+				mainren_balance.sprite = balanceSprite[1];
+		}
+		else {
+			mainren_balance.sprite = balanceSprite[2];
+		}
 	}
 
 }
