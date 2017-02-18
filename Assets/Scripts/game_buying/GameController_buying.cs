@@ -9,7 +9,7 @@ public class GameController_buying : MonoBehaviour {
 	public Text pigero_Text, pigdy_Text, lollipig_Text, hintText;
 	public Sprite[] wrong_fillred = new Sprite[3];
 	public SpriteRenderer mainren_wrong1, mainren_wrong2, mainren_wrong3;
-	public GameObject feedbackPanel, wrongPanel, startPanel, finishBtn;
+	public GameObject feedbackPanel, wrongPanel, startPanel, finishBtn, step1BG, step2BG, step1TextObj, step2TextObj;
 	public GameObject[] pigeroSprite = new GameObject[3];
 	public GameObject[] pigdySprite = new GameObject[4];
 	public GameObject[] lollipigSprite = new GameObject[3];
@@ -37,8 +37,8 @@ public class GameController_buying : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Ans = testbankDBHandler_balance.Ans;
-		hint = testbankDBHandler_balance.hint;
+		Ans = testbankDBHandler_buying.Ans;
+		hint = testbankDBHandler_buying.hint;
 
 		if(Input.GetKeyDown(KeyCode.Escape))
 			Application.Quit();
@@ -137,8 +137,8 @@ public class GameController_buying : MonoBehaviour {
 	void answerRight () {
 		gamestate = false;
 
-		// feedbackPanel.SetActive(true);
-		// feedbackAni.Play("balance_right");
+		feedbackPanel.SetActive(true);
+		feedbackAni.Play("buying_right");
 
 		showPanel = true;
 		isRight = true;	
@@ -200,10 +200,13 @@ public class GameController_buying : MonoBehaviour {
 
 	void stepHint () {
 		if (k == 1) {
-			
+			step1BG.SetActive(true);
+			step1TextObj.SetActive(true);
 		}
 		else if (k == 2) {
-			hintText.text = hint;
+			step2BG.SetActive(true);
+			step2TextObj.SetActive(true);
+			hintText.text = "提示2: " + hint;
 		}
 	}
 	

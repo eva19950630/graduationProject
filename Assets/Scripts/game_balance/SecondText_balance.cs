@@ -16,14 +16,13 @@ public class SecondText_balance : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gid = GameController_balance.gID;
-
 		if(GameObject.Find("BossSaveData"))
 			isboss = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		gid = GameController_balance.gID;
 		bool gamestate = GameController_balance.gamestate;
 
 		if (isboss) {

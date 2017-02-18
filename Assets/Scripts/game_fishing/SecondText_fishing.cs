@@ -16,14 +16,13 @@ public class SecondText_fishing : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gid = GameController_fishing.gID;
-
 		if(GameObject.Find("BossSaveData"))
 			isboss = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		gid = GameController_fishing.gID;
 		bool gamestate = GameController_fishing.gamestate;
 		
 		if (isboss) {

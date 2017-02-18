@@ -16,7 +16,6 @@ public class SecondText_lock : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gid = GameController_lock.gID;
 		sec.color = Color.yellow;
 		
 		if(GameObject.Find("BossSaveData"))
@@ -25,6 +24,7 @@ public class SecondText_lock : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		gid = GameController_lock.gID;
 		bool gamestate = GameController_lock.gamestate;
 
 		if (isboss) {
