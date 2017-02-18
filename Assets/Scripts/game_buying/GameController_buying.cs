@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameController_buying : MonoBehaviour {
-	public Text lollipig_Text, pigero_Text, pigdy_Text, hintText;
+	public Text pigero_Text, pigdy_Text, lollipig_Text, hintText;
 	public Sprite[] wrong_fillred = new Sprite[3];
 	public SpriteRenderer mainren_wrong1, mainren_wrong2, mainren_wrong3;
 	public GameObject feedbackPanel, wrongPanel, startPanel, finishBtn;
+	public GameObject[] pigeroSprite = new GameObject[3];
+	public GameObject[] pigdySprite = new GameObject[4];
+	public GameObject[] lollipigSprite = new GameObject[3];
 	public Animator feedbackAni;
 
 	private bool showPanel = false;
-	private int user_Ans, ans_int;
+	private int user_Ans, ans_int, pigero_count, pigdy_count, lollipig_count;
+	private double pigero_price, pigdy_price, lollipig_price;
 	private string Ans, hint;
 
 	public static bool gamestate, isRight, isboss;
@@ -44,12 +49,66 @@ public class GameController_buying : MonoBehaviour {
 		startPanel.SetActive(false);
 	}
 
+/*Click commodities , change counts and calculate the price*/
+	public void clickCommoditiesBtn (string cbtn_name) {
+		if (cbtn_name == "pigerobtn") {
+			pigero_count++;
+			if (pigero_count < 4) {
+				for (int i = 0; i < 3; i++)
+					pigeroSprite[pigero_count-1].SetActive(true);
+			}
+			pigero_Text.text = ""+pigero_count;
+			pigero_price = 3 * pigero_count;
+			if (pigero_price > 100) {
+				pigero_price*=0.9;
+				pigero_price = Math.Round(pigero_price, MidpointRounding.AwayFromZero);
+			}
+			print("pigero_count:" + pigero_count + " / pigero_price:" + pigero_price);
+		} else if (cbtn_name == "pigdybtn") {
+			pigdy_count++;
+			if (pigdy_count < 5) {
+				for (int i = 0; i < 4; i++)
+					pigdySprite[pigdy_count-1].SetActive(true);
+			}
+			pigdy_Text.text = ""+pigdy_count;
+			pigdy_price = 1 * pigdy_count;
+			print("pigdy_count:" + pigdy_count + " / pigdy_price:" + pigdy_price);
+		} else if (cbtn_name == "lollipigbtn") {
+			lollipig_count++;
+			if (lollipig_count < 4) {
+				for (int i = 0; i < 3; i++)
+					lollipigSprite[lollipig_count-1].SetActive(true);
+			}
+			lollipig_Text.text = ""+lollipig_count;
+			if (lollipig_count >= 2) {
+				if (lollipig_count % 2 == 0)
+					lollipig_price = 40 * (lollipig_count/2);
+				else
+					lollipig_price = 25 + 40 * (lollipig_count/2);
+			} else {
+				lollipig_price = 25;
+			}
+			print("lollipig_count:" + lollipig_count + " / lollipig_price:" + lollipig_price);
+		}
+	}
+
+/*Click reset btn and reset all weights number*/
+	public void clickResetBtn () {
+		pigero_count = 0;
+		pigdy_count = 0;
+		lollipig_count = 0;
+		pigero_Text.text = ""+pigero_count;
+		pigdy_Text.text = ""+pigdy_count;
+		lollipig_Text.text = ""+lollipig_count;
+		print("reset");
+	}
+
 /*Check user answer and compare Ans*/
 	public void checkAnswer () {
 		gamestate = false;
 
 		ans_int = System.Convert.ToInt32(Ans);
-		// user_Ans = weight_num1*1000 + weight_num2*500 + weight_num3*10+ weight_num4;
+		user_Ans = System.Convert.ToInt32(pigero_price + pigdy_price + lollipig_price);
 		
 		print ("Ans: " + Ans + " / user_Ans: " + user_Ans);
 
