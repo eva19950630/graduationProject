@@ -17,10 +17,10 @@ public class GameController_lock : MonoBehaviour {
 	private bool showPanel = false;
 	private int user_Ans;
 	private int[] sepNum = new int[4];
-	private string Ans, hint, ques_id;
+	private string Ans, hint;
 
 	public static bool gamestate, isRight, isboss;
-	public static int k;
+	public static int k, gID;
 
 
 	// Use this for initialization
@@ -32,13 +32,13 @@ public class GameController_lock : MonoBehaviour {
 		isRight = false;
 		k = 0;
 
+		gID = 1;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		Ans = testbankDBHandler_lock.Ans;
 		hint = testbankDBHandler_lock.hint;
-		ques_id = testbankDBHandler_lock.ques_id;
 
 		if(Input.GetKeyDown(KeyCode.Escape))
 			Application.Quit();
@@ -209,21 +209,13 @@ public class GameController_lock : MonoBehaviour {
 				else
 					SceneManager.LoadScene("Chapter_WorldThree");		
 			}
-
-
-		}
-		else if (k == 3) {
+		} else if (k == 3) {
 			if (isboss)
 				BossSave.setDamage();
 
-			if (ques_id == "3" || ques_id == "5" || ques_id == "6" || ques_id == "12")
-				SceneManager.LoadScene("TeacherScene_lock");
-			else if (ques_id == "29" || ques_id == "32" || ques_id == "37" || ques_id == "45")
-				SceneManager.LoadScene("TeacherScene_lock_2");
-			else if (ques_id == "46" || ques_id == "47" || ques_id == "48" || ques_id == "66")
-				SceneManager.LoadScene("TeacherScene_lock_3");
-				
-			yield return new WaitForSeconds(0.5f);	
+			yield return new WaitForSeconds(1f);
+			game_mechanism.enterTeaching(gID);
+
 		} else {
 			yield return new WaitForSeconds(1f);
 			stepHint ();

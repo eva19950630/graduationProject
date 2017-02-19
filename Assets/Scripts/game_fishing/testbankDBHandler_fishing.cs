@@ -4,23 +4,26 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class testbankDBHandler_fishing : MonoBehaviour {
-	public string strurl = "http://163.21.245.190/graduationProject/aq_showques(fishing).php";
+	public string strurl;
+
 	public Text QuesText, hintText;
+	public GameObject hintObj;
+
 	public string[] str_arr, hints;
 	public string a, hints2;
 	public int k;
 	public bool isWaitOneSec = true;
-	public GameObject hintObj;
 
-	public static string ques_id, questions;
+	public static string ques_id, ques_kind;
 	public static string[] fishNum = new string[10];
 	public static List<string> Anslist = new List<string>();
-
 	
 	// Use this for initialization
 	void Start () {
+		strurl = "http://163.21.245.190/graduationProject/aqQues(fishing).php";
+
 		ques_id = "";
-		questions = "";
+		ques_kind = "";
 		for (int i = 0; i < 10; i++)
 			fishNum[i] = "";
 		Anslist.Clear();
@@ -52,8 +55,8 @@ public class testbankDBHandler_fishing : MonoBehaviour {
 		str_arr = str_arr2[0].Split(' ');
 
 		ques_id = str_arr[0];
-		questions = str_arr2[1];
-		// print(questions);
+		ques_kind = str_arr2[1];
+		// print(ques_kind);
 		a = str_arr[1];	
 
 		QuesText.text = str_arr[2];

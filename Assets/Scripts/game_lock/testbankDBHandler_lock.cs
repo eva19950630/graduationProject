@@ -4,15 +4,20 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class testbankDBHandler_lock : MonoBehaviour {
-	public string strurl = "http://163.21.245.190/graduationProject/num_showques(lock).php";
+	public string strurl;
+	
 	public Text QuesText;
+
 	public string[] str_arr;
 
-	public static string ques_id, questions, Ans, hint;
+	public static string ques_id, ques_kind, Ans, hint;
 
 	// Use this for initialization
 	void Start () {
+		strurl = "http://163.21.245.190/graduationProject/numberQues_normal.php";
+
 		ques_id = "";
+		ques_kind = "";
 		Ans = "";
 		hint = "";
 		for (int i = 0; i < str_arr.Length; i++)
@@ -40,13 +45,13 @@ public class testbankDBHandler_lock : MonoBehaviour {
 		str_arr = str.Split('@');
 
 		ques_id = str_arr[0];
-		questions = str_arr[1];
+		ques_kind = str_arr[1];
 		QuesText.text = str_arr[2];
 		Ans = str_arr[3];
 		hint = str_arr[4];
 
-/*PRINT Fishing info*/		
-		//Debug.Log("Lock INFO: " + "ques_id: " + ques_id + " / Ans: " + Ans + " / hint: " + hint);
+/*PRINT Lock info*/		
+		// Debug.Log("Lock INFO: " + "ques_id: " + ques_id + " / ques_kind: " + ques_kind + " / Ans: " + Ans + " / hint: " + hint);
 
 	}
 }

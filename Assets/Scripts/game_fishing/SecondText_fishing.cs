@@ -6,26 +6,26 @@ using UnityEngine.SceneManagement;
 public class SecondText_fishing : MonoBehaviour {
 	public Text sec;
 	public GameObject secText, clock_ori, label2, wrongsymbol, feedbackPanel, finishBtn, resetBtn;
-	//finishBtn;
 	public Animator clockAni, feedbackAni;
+
 	public float ti = 0;
 	public int a = 0;
 	public bool isboss = false;
+	
+	private int gid;
+
 	// Use this for initialization
 	void Start () {
-		// clock_alarm.SetActive(false);
-		//timesupText.SetActive(false);
-		//sec.color = Color.blue;
 		if(GameObject.Find("BossSaveData"))
 			isboss = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		gid = GameController_fishing.gID;
 		bool gamestate = GameController_fishing.gamestate;
-		string ques_id = testbankDBHandler_fishing.ques_id;
 		
-		if(isboss){
+		if (isboss) {
 			if (gamestate == true) {
 				ti -= Time.deltaTime;
 				a = (int)ti + 90;
@@ -44,19 +44,11 @@ public class SecondText_fishing : MonoBehaviour {
 					label2.SetActive(false);
 					finishBtn.SetActive(false);
 					resetBtn.SetActive(false);
-					// clock_alarm.SetActive(true);
 					feedbackPanel.SetActive(true);
 					feedbackAni.Play("fishing_timesup");
-					// feedbackText.color = Color.red;
-					// feedbackText.text = "Time's Up !";
 				}
 				if (ti <= -92) {
-					if (ques_id == "3" || ques_id == "5" || ques_id == "6" || ques_id == "12")
-						SceneManager.LoadScene("aq_TeacherScene_fishing");
-					else if (ques_id == "29" || ques_id == "32" || ques_id == "37" || ques_id == "45")
-						SceneManager.LoadScene("aq_TeacherScene_fishing_2");
-					else if (ques_id == "46" || ques_id == "47" || ques_id == "48" || ques_id == "66")
-						SceneManager.LoadScene("aq_TeacherScene_fishing_3");
+					game_mechanism.enterTeaching(gid);
 				}
 			} else {
 				if (ti <= -81)
@@ -65,7 +57,7 @@ public class SecondText_fishing : MonoBehaviour {
 					sec.text = ""+ a;
 				clockAni.enabled = false;
 			}
-		}else{
+		} else {
 			if (gamestate == true) {
 				ti -= Time.deltaTime;
 				a = (int)ti + 180;
@@ -84,19 +76,11 @@ public class SecondText_fishing : MonoBehaviour {
 					label2.SetActive(false);
 					finishBtn.SetActive(false);
 					resetBtn.SetActive(false);
-					// clock_alarm.SetActive(true);
 					feedbackPanel.SetActive(true);
 					feedbackAni.Play("fishing_timesup");
-					// feedbackText.color = Color.red;
-					// feedbackText.text = "Time's Up !";
 				}
 				if (ti <= -182) {
-					if (ques_id == "3" || ques_id == "5" || ques_id == "6" || ques_id == "12")
-						SceneManager.LoadScene("aq_TeacherScene_fishing");
-					else if (ques_id == "29" || ques_id == "32" || ques_id == "37" || ques_id == "45")
-						SceneManager.LoadScene("aq_TeacherScene_fishing_2");
-					else if (ques_id == "46" || ques_id == "47" || ques_id == "48" || ques_id == "66")
-						SceneManager.LoadScene("aq_TeacherScene_fishing_3");
+					game_mechanism.enterTeaching(gid);
 				}
 			} else {
 				if (ti <= -171)

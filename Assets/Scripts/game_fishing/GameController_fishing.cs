@@ -18,11 +18,11 @@ public class GameController_fishing : MonoBehaviour {
 	public Animator feedbackAni;
 
 	private bool catchfish = true, showPanel = false;
-	private string buttonName, ans, user_ans, ques_id;
+	private string buttonName, ans, user_ans;
 	private string[] fishNum = new string[10];
 	private List<string> Anslist = new List<string>();
 	
-	public static int k = 0;
+	public static int k, gID;
 	public static bool gamestate = true, isRight = false;
 	public static bool[] catching = new bool[10];
 	//check boss or normal world
@@ -32,18 +32,20 @@ public class GameController_fishing : MonoBehaviour {
 	void Start () {
 		if(GameObject.Find("BossSaveData"))
 			isboss = true;
+		
 		gamestate = false;
 		isRight = false;
-		k = 0;
+		k = 0;	
 		for (int i = 0; i < 10; i++)
 			catching[i] = false;
+
+		gID = 2;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		fishNum = testbankDBHandler_fishing.fishNum;
 		Anslist = testbankDBHandler_fishing.Anslist;
-		ques_id = testbankDBHandler_fishing.ques_id;
 
 		for (int i = 0; i < 10; i++)
 			fishText[i].text = fishNum[i];
@@ -148,19 +150,13 @@ public class GameController_fishing : MonoBehaviour {
 				else
 					SceneManager.LoadScene("Chapter_WorldThree");		
 			}
-		}
-		else if (k == 3) {
+		} else if (k == 3) {
 			if(isboss)
 				BossSave.setDamage();
 			
-			if (ques_id == "3" || ques_id == "5" || ques_id == "6" || ques_id == "12")
-				SceneManager.LoadScene("aq_TeacherScene_fishing");
-			else if (ques_id == "29" || ques_id == "32" || ques_id == "37" || ques_id == "45")
-				SceneManager.LoadScene("aq_TeacherScene_fishing_2");
-			else if (ques_id == "46" || ques_id == "47" || ques_id == "48" || ques_id == "66")
-				SceneManager.LoadScene("aq_TeacherScene_fishing_3");
-				
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(1f);
+			game_mechanism.enterTeaching(gID);
+
 		} else {
 			yield return new WaitForSeconds(1f);
 		}
