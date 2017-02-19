@@ -14,7 +14,7 @@ public class testbankDBHandler_buying : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		strurl = "http://163.21.245.190/graduationProject/numberQues_normal.php";
+		strurl = "http://163.21.245.190/graduationProject/question/numberQues_normal.php";
 
 		ques_id = "";
 		ques_kind = "";

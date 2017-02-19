@@ -14,7 +14,7 @@ public class testbankDBHandler_lock : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		strurl = "http://163.21.245.190/graduationProject/numberQues_normal.php";
+		strurl = "http://163.21.245.190/graduationProject/question/numberQues_normal.php";
 
 		ques_id = "";
 		ques_kind = "";
@@ -51,7 +51,7 @@ public class testbankDBHandler_lock : MonoBehaviour {
 		hint = str_arr[4];
 
 /*PRINT Lock info*/		
-		// Debug.Log("Lock INFO: " + "ques_id: " + ques_id + " / ques_kind: " + ques_kind + " / Ans: " + Ans + " / hint: " + hint);
+		Debug.Log("Lock INFO: " + "ques_id: " + ques_id + " / ques_kind: " + ques_kind + " / Ans: " + Ans + " / hint: " + hint);
 
 	}
 }

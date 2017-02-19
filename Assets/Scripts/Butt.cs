@@ -5,17 +5,14 @@ using UnityEngine.SceneManagement;
 
 
 public class Butt : MonoBehaviour {
-
 	public Slider loadingBar;
 	public GameObject loadingImage, accountObj, passwordObj, accountLabel, passwordLabel;
-	public InputField accountField, passwordField;
 
 	private AsyncOperation async;
 
 	// Use this for initialization
 	void Start () {
-		accountField.text = "admin";
-		passwordField.text = "1234";
+		
 	}
 	
 	// Update is called once per frame
@@ -28,11 +25,9 @@ public class Butt : MonoBehaviour {
 	// 	StartCoroutine (LoadAndBar ("menu"));
 	// }
 
-	public void loginCheck () {
-		if ((accountField.text == "admin") && (passwordField.text == "1234")) {
-			loadingImage.SetActive (true);
-			StartCoroutine (LoadAndBar ("menu"));
-		}	
+	public void showloadingbar () {
+		loadingImage.SetActive (true);
+		StartCoroutine (LoadAndBar ("menu"));
 	}
 
 

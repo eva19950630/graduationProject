@@ -56,8 +56,8 @@
      <Compile Include="Assets\Scripts\Chapter\infinity_background.cs" />
      <Compile Include="Assets\Scripts\Chapter\rotateStar.cs" />
      <Compile Include="Assets\Scripts\Chapter\selectCh.cs" />
-     <Compile Include="Assets\Scripts\LoadBG.cs" />
      <Compile Include="Assets\Scripts\ScreenSizeMatch.cs" />
+     <Compile Include="Assets\Scripts\UserDataSave.cs" />
      <Compile Include="Assets\Scripts\WorldIII_Data\Map1_2.cs" />
      <Compile Include="Assets\Scripts\WorldIII_Data\gameventIII.cs" />
      <Compile Include="Assets\Scripts\WorldIII_Data\savedataIII.cs" />
