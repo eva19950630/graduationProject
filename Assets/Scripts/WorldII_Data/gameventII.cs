@@ -330,8 +330,8 @@ public class gameventII : MonoBehaviour {
 	    		case 3:
 	    			SceneManager.LoadScene("QuickanswerScene");
 	    			break;
-	    		case 9:
-
+	    		case 4:
+	    			SceneManager.LoadScene("BuyingScene");
 	    			break;
 	    	}
     	}
