@@ -18,7 +18,7 @@ public class testbankDBHandler_quickanswer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		strurl = "http://163.21.245.190/graduationProject/numQues(quickanswer).php";
+		strurl = "http://163.21.245.190/graduationProject/question/numQues(quickanswer).php";
 
 		ques_list.Clear();
 		for (int i = 0; i < str_arr.Length; i++)

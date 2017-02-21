@@ -20,7 +20,7 @@ public class testbankDBHandler_fishing : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		strurl = "http://163.21.245.190/graduationProject/aqQues(fishing).php";
+		strurl = "http://163.21.245.190/graduationProject/question/aqQues(fishing).php";
 
 		ques_id = "";
 		ques_kind = "";
