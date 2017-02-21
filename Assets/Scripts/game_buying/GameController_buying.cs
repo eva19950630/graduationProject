@@ -58,7 +58,7 @@ public class GameController_buying : MonoBehaviour {
 					pigeroSprite[pigero_count-1].SetActive(true);
 			}
 			pigero_Text.text = ""+pigero_count;
-			pigero_price = 3 * pigero_count;
+			pigero_price = 5 * pigero_count;
 			if (pigero_price > 100) {
 				pigero_price*=0.9;
 				pigero_price = Math.Round(pigero_price, MidpointRounding.AwayFromZero);
@@ -82,11 +82,11 @@ public class GameController_buying : MonoBehaviour {
 			lollipig_Text.text = ""+lollipig_count;
 			if (lollipig_count >= 2) {
 				if (lollipig_count % 2 == 0)
-					lollipig_price = 40 * (lollipig_count/2);
+					lollipig_price = 80 * (lollipig_count/2);
 				else
-					lollipig_price = 25 + 40 * (lollipig_count/2);
+					lollipig_price = 50 + 80 * (lollipig_count/2);
 			} else {
-				lollipig_price = 25;
+				lollipig_price = 50;
 			}
 			print("lollipig_count:" + lollipig_count + " / lollipig_price:" + lollipig_price);
 		}
@@ -100,6 +100,12 @@ public class GameController_buying : MonoBehaviour {
 		pigero_Text.text = ""+pigero_count;
 		pigdy_Text.text = ""+pigdy_count;
 		lollipig_Text.text = ""+lollipig_count;
+		for (int i = 0; i < 3; i++) {
+			pigeroSprite[i].SetActive(false);
+			lollipigSprite[i].SetActive(false);
+		}
+		for (int i = 0; i < 4; i++)
+			pigdySprite[i].SetActive(false);
 		print("reset");
 	}
 
