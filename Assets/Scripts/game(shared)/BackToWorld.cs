@@ -27,8 +27,14 @@ public class BackToWorld : MonoBehaviour {
 		//Anslist.Clear();
 		if(isboss)
 			SceneManager.LoadScene("BossStage");
-		else
+		else if(GameObject.Find("datasaverI"))
 			SceneManager.LoadScene("Chapter_WorldOne");
+		else if(GameObject.Find("datasaverII"))
+			SceneManager.LoadScene("Chapter_WorldTwo");
+		else if(GameObject.Find("datasaverIII"))
+			SceneManager.LoadScene("Chapter_WorldThree");
+		else
+			print("ERROR back!");
 	}
 
 }
