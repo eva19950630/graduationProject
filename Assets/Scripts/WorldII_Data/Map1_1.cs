@@ -42,9 +42,10 @@ public class Map1_1 : MonoBehaviour {
 	private GameObject signClone;
 	//sprites for change
 	// public Sprite sprite_lock;
+	public Sprite sprite_lock;
 	public Sprite sprite_fish;
 	public Sprite sprite_paper;
-	public Sprite sprite_candy;
+	public Sprite sprite_balance;
 	//sign position (stop position with 2f in y)
 	public static Vector3[] world1_stop = new [] 
 	{
@@ -66,9 +67,10 @@ public class Map1_1 : MonoBehaviour {
 		new Vector3(0f,2f,-5f),
 	};
 	//Material for change
-	public Material material_candy;
+	public Material material_lock;
 	public Material material_fish;
 	public Material material_paper;
+	public Material material_balance;
 	//floor array for change
 	public static GameObject[] world1_floor;
 	
@@ -110,7 +112,7 @@ public class Map1_1 : MonoBehaviour {
 		new Vector3(13f, 15f, -19f),
 		new Vector3(13f, 15f, -24f),
 		new Vector3(13f, 15f, -29f),
-		new Vector3(8f, 15f, -14f),
+		new Vector3(8f, 15f, -29f),
 
 	};
 	//clue
@@ -163,7 +165,16 @@ public class Map1_1 : MonoBehaviour {
 		y_Save_Pos = 3;
 		now_Save_Pos = 0;
 
-		count = 5;
+		count = 3;
+		while(count > 0){
+			sign = Random.Range(1,15);
+			if(world1_game[sign] == -1){
+				world1_game[sign] = 1;
+				count --;
+			}
+		}
+
+		count = 4;
 		while(count > 0){
 			sign = Random.Range(1,15);
 			if(world1_game[sign] == -1){
@@ -172,7 +183,7 @@ public class Map1_1 : MonoBehaviour {
 			}
 		}
 
-		count = 5;
+		count = 4;
 		while(count > 0){
 			sign = Random.Range(1,15);
 			if(world1_game[sign] == -1){
@@ -180,6 +191,7 @@ public class Map1_1 : MonoBehaviour {
 				count --;
 			}
 		}
+
 		for(i=1;i<16;i++){
 			if(world1_game[i] == -1){
 				world1_game[i] = 4;
@@ -229,15 +241,18 @@ public class Map1_1 : MonoBehaviour {
 			//print(i + ":" + world1_game[i]);
 			if(world1_game[i] != -1){
 				signClone = Instantiate(sign_prefab, world1_stop[i], Quaternion.identity) as GameObject;
-				if(world1_game[i] == 4 && signClone!= null){
-					signClone.GetComponent<SpriteRenderer>().sprite = sprite_candy;
-					world1_floor[i].GetComponent<Renderer>().material = material_candy;
-				}else if(world1_game[i] == 2){
+				if(world1_game[i] == 1 && signClone!= null){
+					signClone.GetComponent<SpriteRenderer>().sprite = sprite_lock;
+					world1_floor[i].GetComponent<Renderer>().material = material_lock;
+				}else if(world1_game[i] == 2 && signClone!= null){
 					signClone.GetComponentInChildren<SpriteRenderer>().sprite = sprite_fish;
 					world1_floor[i].GetComponent<Renderer>().material = material_fish;
-				}else if(world1_game[i] == 3){
+				}else if(world1_game[i] == 3 && signClone!= null){
 					signClone.GetComponentInChildren<SpriteRenderer>().sprite = sprite_paper;
 					world1_floor[i].GetComponent<Renderer>().material = material_paper;
+				}else if(world1_game[i] == 4 && signClone!= null){
+					signClone.GetComponent<SpriteRenderer>().sprite = sprite_balance;
+					world1_floor[i].GetComponent<Renderer>().material = material_balance;
 				}else{
 					Debug.Log("error in clone sign");
 				}

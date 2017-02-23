@@ -285,7 +285,7 @@ public class gameventIII : MonoBehaviour {
     public void turn(){
 
     	//gamevent.p = 2;
-    	p = Random.Range(1,4);
+    	p = 6;//Random.Range(1,7);
 		Dice.SetActive(true);
 		Dice.transform.position = character.transform.position + new  Vector3(0f,-1f,-2.5f);//(-2.7f,1f,-7.5f);
 		diceAni.SetBool("setPosi",true);
@@ -294,12 +294,16 @@ public class gameventIII : MonoBehaviour {
     	throwButton.SetActive(false);
     	if (p == 1) {
     		diceAni.Play("roll-1");
-    	}
-    	else if (p == 2) {
+    	}else if (p == 2) {
     		diceAni.Play("roll-2");
-    	}
-    	else if (p == 3) {
+    	}else if (p == 3) {
     		diceAni.Play("roll-3");
+    	}else if (p == 4) {
+    		diceAni.Play("roll-4");
+    	}else if (p == 5) {
+    		diceAni.Play("roll-5");
+    	}else if (p == 6) {
+    		diceAni.Play("roll-6");
     	}
     	//entergame(now + p);
     	Debug.Log(gameventIII.p);
@@ -330,8 +334,11 @@ public class gameventIII : MonoBehaviour {
 	    		case 3:
 	    			SceneManager.LoadScene("QuickanswerScene");
 	    			break;
-	    		case 9:
-
+	    		case 4:
+	    			SceneManager.LoadScene("BalanceScene");
+	    			break;
+	    		case 5:
+	    			SceneManager.LoadScene("BuyingScene");
 	    			break;
 	    	}
     	}
