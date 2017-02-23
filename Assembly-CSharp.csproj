@@ -50,7 +50,6 @@
      <Compile Include="Assets\Scripts\BossStage\fightAnim_boss.cs" />
      <Compile Include="Assets\Scripts\BossStage\fightAnim_player.cs" />
      <Compile Include="Assets\Scripts\BossStage\infinitybg.cs" />
-     <Compile Include="Assets\Scripts\Butt.cs" />
      <Compile Include="Assets\Scripts\Chapter\Wmap.cs" />
      <Compile Include="Assets\Scripts\Chapter\bgmusic.cs" />
      <Compile Include="Assets\Scripts\Chapter\infinity_background.cs" />
