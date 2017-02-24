@@ -87,6 +87,24 @@ public class BossSave : MonoBehaviour {
 				isdamage = false;
 				damage = 40;
 			}
+		}else if(gamenum == 4){
+			if(GameController_balance.k < 3){
+				// print(isdamage);
+				isdamage = true;
+				damage = 30-(GameController_balance.k*10);
+			}else{
+				isdamage = false;
+				damage = 40;
+			}
+		}else if(gamenum == 5){
+			if(GameController_buying.k < 3){
+				// print(isdamage);
+				isdamage = true;
+				damage = 30-(GameController_buying.k*10);
+			}else{
+				isdamage = false;
+				damage = 40;
+			}
 		}
 		damage /= 100;
 	}
