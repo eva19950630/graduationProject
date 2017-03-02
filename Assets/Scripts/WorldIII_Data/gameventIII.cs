@@ -347,8 +347,8 @@ public class gameventIII : MonoBehaviour {
     }
 
     public void showclue(){
-    	clue_L.text = Map1_2.cluelist_L;
-    	clue_R.text = Map1_2.cluelist_R;
+    	// clue_L.text = Map1_2.cluelist_L;
+    	// clue_R.text = Map1_2.cluelist_R;
     	if(open_clue){
     		clue_panel.SetActive(false);
     		open_clue = false;	
