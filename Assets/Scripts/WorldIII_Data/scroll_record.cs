@@ -17,6 +17,6 @@ public class scroll_record : MonoBehaviour {
 	}
 
 	public void ListScroll(RectTransform list){
-        list.localPosition = new Vector3 (list.localPosition.x, scrollbar.value * 25f + 175f, list.localPosition.z);////(1)
+        list.localPosition = new Vector3 (list.localPosition.x, scrollbar.value * 600f - 300f, list.localPosition.z);////(1)
     }
 }
