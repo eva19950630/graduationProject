@@ -232,7 +232,7 @@ public class gameventIII : MonoBehaviour {
 	public void checkAns(){
 		string ans;
 		ans = Map1_2.checkAns(index1,index2,index3,index4);
-		if(ans == "4A0B"){
+		if(ans == "4 A 0 B"){
 			Debug.Log("correct ans!");
 			world_finish = true;
 			correctPanel.SetActive(true);
@@ -297,7 +297,7 @@ public class gameventIII : MonoBehaviour {
     public void turn(){
 
     	//gamevent.p = 2;
-    	p = 30;// Random.Range(1,7);
+    	p = Random.Range(1,7);
 		Dice.SetActive(true);
 		Dice.transform.position = character.transform.position + new  Vector3(0f,-1f,-2.5f);//(-2.7f,1f,-7.5f);
 		diceAni.SetBool("setPosi",true);
@@ -362,13 +362,14 @@ public class gameventIII : MonoBehaviour {
     	// clue_L.text = Map1_2.cluelist_L;
     	// clue_R.text = Map1_2.cluelist_R;
     	int c = Map1_2.chance_times + 1;
-    	prompt.text = ("機會次數：" + c + " 次");
+    	prompt.text = ("" + c);
     	history.text = Map1_2.history;
     	if(open_clue){
     		clue_panel.SetActive(false);
     		open_clue = false;	
     		button_clue.image.overrideSprite = sprite_clue1;
 		}else{
+			scroll_record.initial();
 			clue_panel.SetActive(true);
 			open_clue = true;
     		button_clue.image.overrideSprite = sprite_clue2;			

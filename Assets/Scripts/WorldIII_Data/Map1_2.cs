@@ -17,6 +17,7 @@ public class Map1_2 : MonoBehaviour {
 	public static int chance_times;
 	public static bool guessfinish;
 	public static string history;
+	public static int history_count;
 	public static Text answerList;
 	// public static Vector2 rectSize = answerList.GetComponent<RectTransform>().sizeDelta;
 	public static int[,] world1 = new int[8,9]
@@ -180,6 +181,7 @@ public class Map1_2 : MonoBehaviour {
 		chance_times = 0;
 		guessfinish = false;
 		history = "密碼     結果\n";
+		history_count = 1;
 		// rectSize = new Vector2 (rectSize.x, rectSize.y + 50);
 
 		//initial music status
@@ -373,15 +375,16 @@ public class Map1_2 : MonoBehaviour {
 		}
 
 		result = (A + "A" + B + "B");
-		print(a +" "+  b +" "+ c +" "+ d + "    " + A + "A" + B + "B //No = " + No);		
+		// print(a +" "+  b +" "+ c +" "+ d + "    " + A + "A" + B + "B //No = " + No);		
 		
 		history += (a.ToString() + b.ToString() + c.ToString() + d.ToString() + "     " + result + "\n");
+		result = (A + " A " + B + " B");
 		// answerList.rectTransform.sizeDelta = rectSize;
 		// answerList.transform.position = 
 		// 	new Vector3(answerList.transform.position.x, answerList.transform.position.y-25f, answerList.transform.position.z);
 		// answerList.transform.position = ()
 		chance_times --;
-
+		history_count ++;
 		return result;
 	}
 
