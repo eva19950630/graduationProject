@@ -11,8 +11,13 @@ public class SecondText_fishing : MonoBehaviour {
 	public float ti = 0;
 	public int a = 0;
 	public bool isboss = false;
+	public bool isTimesup = false;
 	
 	private int gid;
+
+/*Pass data*/
+	public float ti2 = 0;
+	public int answertime = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +29,11 @@ public class SecondText_fishing : MonoBehaviour {
 	void Update () {
 		gid = GameController_fishing.gID;
 		bool gamestate = GameController_fishing.gamestate;
+
+		if (gamestate == true) {
+			ti2 += Time.deltaTime;
+			answertime = (int)ti2;
+		}
 		
 		if (isboss) {
 			if (gamestate == true) {
@@ -37,6 +47,8 @@ public class SecondText_fishing : MonoBehaviour {
 					clockAni.Play ("clock_quick");
 				}
 				if (ti <= -90) {
+					isTimesup = true;
+
 					clockAni.enabled = false;
 					clock_ori.SetActive(false);
 					wrongsymbol.SetActive(false);
@@ -47,6 +59,8 @@ public class SecondText_fishing : MonoBehaviour {
 					feedbackPanel.SetActive(true);
 					feedbackAni.Play("fishing_timesup");
 				}
+				if (ti <= -90.03f)
+					isTimesup = false;
 				if (ti <= -92) {
 					game_mechanism.enterTeaching(gid);
 				}
@@ -69,6 +83,8 @@ public class SecondText_fishing : MonoBehaviour {
 					clockAni.Play ("clock_quick");
 				}
 				if (ti <= -180) {
+					isTimesup = true;
+
 					clockAni.enabled = false;
 					clock_ori.SetActive(false);
 					wrongsymbol.SetActive(false);
@@ -79,6 +95,8 @@ public class SecondText_fishing : MonoBehaviour {
 					feedbackPanel.SetActive(true);
 					feedbackAni.Play("fishing_timesup");
 				}
+				if (ti <= -180.03f)
+					isTimesup = false;
 				if (ti <= -182) {
 					game_mechanism.enterTeaching(gid);
 				}

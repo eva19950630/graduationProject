@@ -9,14 +9,13 @@ public class UserDataSave : MonoBehaviour {
 
 	public InputField accountField, passwordField;
 	public GameObject warningPanel, loadingImage, accountObj, passwordObj, accountLabel, passwordLabel;
+	public Text warningText;
 	public Slider loadingBar;
 
 	private AsyncOperation async;
-	private string user_name, user_passwd;
 
-	public static string username = "";
-	public static string password = "";
-	public static string result = "";
+/*Pass data*/
+	public static string user_name, user_passwd;
 
 	// public static bool account = false;
 
@@ -35,20 +34,9 @@ public class UserDataSave : MonoBehaviour {
 	}
 
 	public void saveToUserDB () {
-		if (accountField.text == "" || passwordField.text == "") {
-			print("nothing");
-			warningPanel.SetActive(true);
-		} else {
-			user_name = accountField.text;
-			user_passwd = passwordField.text;
-			accountObj.SetActive(false);
-			passwordObj.SetActive(false);
-			accountLabel.SetActive(false);
-			passwordLabel.SetActive(false);
-			loadingImage.SetActive (true);
-			StartCoroutine(handlerEnterUser(user_name, user_passwd));
-		}
-		// print("[User] user_name: " + user_name + " / user_passwd: " + user_passwd);
+		user_name = accountField.text;
+		user_passwd = passwordField.text;
+		StartCoroutine(handlerEnterUser(user_name, user_passwd));
 	}
 
 	IEnumerator handlerEnterUser (string user, string pass) {
@@ -64,9 +52,23 @@ public class UserDataSave : MonoBehaviour {
 		WWW www = new WWW(strurl, form);
 		yield return www;
 		Debug.Log(www.text);
-		StartCoroutine (LoadAndBar ("menu"));
-    }
 
+		if (www.text == "login failed") {
+			warningPanel.SetActive(true);
+		} else {
+			if (www.text == user + " login" || www.text == user + " registered") {
+				accountObj.SetActive(false);
+				passwordObj.SetActive(false);
+				accountLabel.SetActive(false);
+				passwordLabel.SetActive(false);
+				loadingImage.SetActive (true);
+				StartCoroutine (LoadAndBar ("menu"));
+			} else if (www.text == user + " wrong password") {
+				warningPanel.SetActive(true);
+				warningText.text = "密碼輸入錯誤哦！";
+			}
+		}
+    }
     
 	IEnumerator LoadAndBar (string scene) {
 

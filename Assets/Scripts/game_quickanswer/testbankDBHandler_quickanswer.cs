@@ -16,6 +16,9 @@ public class testbankDBHandler_quickanswer : MonoBehaviour {
 	public static string ques_id, ques_kind, Ans;
 	public static bool recallRanQues;
 
+/*Pass data*/
+	public string question, answer;
+
 	// Use this for initialization
 	void Start () {
 		strurl = "http://163.21.245.190/graduationProject/question/numQues(quickanswer).php";
@@ -101,6 +104,9 @@ public class testbankDBHandler_quickanswer : MonoBehaviour {
 		Ans = str_arr2[3];
 		
 		ranSelectAnsNum ();
+
+		question = QuesText.text;
+		answer = Ans;
 	}
 
 	void ranSelectAnsNum () {

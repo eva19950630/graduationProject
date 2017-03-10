@@ -22,6 +22,13 @@ public class GameController_lock : MonoBehaviour {
 	public static bool gamestate, isRight, isboss;
 	public static int k, gID;
 
+/*Pass data*/
+	public string useranswer, status, teaching;
+	private saveGameData_lock script_lock_savedata;
+
+	void Awake () {
+		script_lock_savedata = GetComponent<saveGameData_lock> ();
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -131,13 +138,33 @@ public class GameController_lock : MonoBehaviour {
 		print ("user_Ans: " + user_Ans + " / Ans: " + Ans);
 
 		if (user_Ans == ans_int) {
+			useranswer = ""+user_Ans;
+			status = "right";
+			teaching = "no";
+			script_lock_savedata.getGameData ();
+			
 			isRight = true;
 		} else {
-			if (k == 0) {		
+			if (k == 0) {	
+				useranswer = ""+user_Ans;
+				status = "wrong";
+				teaching = "no";
+				script_lock_savedata.getGameData ();
+
 				mainren_wrong1.sprite = wrong_fillred[0];
 			} else if (k == 1) {
+				useranswer = ""+user_Ans;
+				status = "wrong";
+				teaching = "no";
+				script_lock_savedata.getGameData ();
+
 				mainren_wrong2.sprite = wrong_fillred[1];
 			} else {
+				useranswer = ""+user_Ans;
+				status = "wrong";
+				teaching = "yes";
+				script_lock_savedata.getGameData ();
+
 				mainren_wrong3.sprite = wrong_fillred[2];
 				finishBtn.SetActive(false);
 				gamestate = false;
@@ -149,6 +176,7 @@ public class GameController_lock : MonoBehaviour {
 			answerRight ();
 		else
 			answerWrong ();
+
 	}
 
 	void SeparateNumber (int tmp) {	
@@ -175,7 +203,6 @@ public class GameController_lock : MonoBehaviour {
 	}
 
 	void answerWrong () {
-
 		// feedbackPanel.SetActive(true);
 		// feedbackAni.Play("wrong");
 		// feedbackText.text = "答錯了!";
@@ -215,7 +242,6 @@ public class GameController_lock : MonoBehaviour {
 
 			yield return new WaitForSeconds(1f);
 			game_mechanism.enterTeaching(gID);
-
 		} else {
 			yield return new WaitForSeconds(1f);
 			stepHint ();

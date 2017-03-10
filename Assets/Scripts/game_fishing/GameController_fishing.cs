@@ -28,6 +28,14 @@ public class GameController_fishing : MonoBehaviour {
 	//check boss or normal world
 	public bool isboss = false;
 
+/*Pass data*/
+	public string useranswer, buttonname, status, teaching;
+	private saveGameData_fishing script_fishing_savedata;
+
+	void Awake () {
+		script_fishing_savedata = GetComponent<saveGameData_fishing> ();
+	}
+
 	// Use this for initialization
 	void Start () {
 		if(GameObject.Find("BossSaveData"))
@@ -63,51 +71,70 @@ public class GameController_fishing : MonoBehaviour {
 		//print("Anslist.Count: " + Anslist.Count);
 		/*for (int i = 0; i < Anslist.Count; i++)
 			Debug.Log("Ans[" + i + "]: " + Anslist[i]);*/
-		
-		if (Anslist.Count == 2) {
-			var user_ans_trans = "";
-			if(user_ans != null)
-				user_ans_trans = user_ans.Replace("×", "*").Replace("÷","/");
-			double user_ans_compute = Evaluate(user_ans_trans);
-			int ans_compute = System.Convert.ToInt32(Anslist[1]);
-			print("user_ans_compute: " + user_ans_compute + " / ans_compute: " + ans_compute);
-			if (user_ans_compute == ans_compute)
-				isRight = true;
+		if (user_ans == null) {
+			user_ans = "null";
+			// print(user_ans);
 		} else {
-			for (int i = 0; i < Anslist.Count; i++) {
-				if (user_ans == Anslist[i])
+			if (Anslist.Count == 2) {
+				var user_ans_trans = "";
+				if(user_ans != null)
+					user_ans_trans = user_ans.Replace("×", "*").Replace("÷","/");
+				double user_ans_compute = Evaluate(user_ans_trans);
+				int ans_compute = System.Convert.ToInt32(Anslist[1]);
+				print("user_ans_compute: " + user_ans_compute + " / ans_compute: " + ans_compute);
+				if (user_ans_compute == ans_compute)
 					isRight = true;
+			} else {
+				for (int i = 0; i < Anslist.Count; i++) {
+					if (user_ans == Anslist[i])
+						isRight = true;
+				}
 			}
 		}
 		
-		if (isRight) {	
+		if (isRight) {
+			useranswer = ""+user_ans;
+			buttonname = "finish";
+			status = "right";
+			teaching = "no";
+			script_fishing_savedata.getGameData ();
+
 			finishBtn.SetActive(false);
 			resetBtn.SetActive(false);
 			label3.SetActive(false);
-			
 
 			feedbackPanel.SetActive(true);
-			// feedbackText.text = "答對了!";
 			feedbackAni.Play("fishing_right");
-
 			showPanel = true;
 
 			Debug.Log("User Ans: " + user_ans + " / Wrong times: " + k);
 		} else {
-			//audio.playWrongSound();
-			// gamestate = true;
-
-			// feedbackPanel.SetActive(true);
-			// feedbackText.text = "答錯了!";
-			// feedbackAni.Play("wrong");
 			wrongPanel.SetActive(true);
 			showPanel = true;
 
-			if (k == 0) {		
+			if (k == 0) {
+				useranswer = ""+user_ans;
+				buttonname = "finish";
+				status = "wrong";
+				teaching = "no";
+				script_fishing_savedata.getGameData ();
+
 				mainren_wrong1.sprite = wrong_fillred[0];	
 			} else if (k == 1) {
+				useranswer = ""+user_ans;
+				buttonname = "finish";
+				status = "wrong";
+				teaching = "no";
+				script_fishing_savedata.getGameData ();
+
 				mainren_wrong2.sprite = wrong_fillred[1];
 			} else {
+				useranswer = ""+user_ans;
+				buttonname = "finish";
+				status = "wrong";
+				teaching = "yes";
+				script_fishing_savedata.getGameData ();
+
 				mainren_wrong3.sprite = wrong_fillred[2];
 				finishBtn.SetActive(false);
 				resetBtn.SetActive(false);
@@ -118,8 +145,7 @@ public class GameController_fishing : MonoBehaviour {
 			k++;
 			Debug.Log("User Ans: " + user_ans + " / Wrong times: " + k);
 
-			clickReset ();
-
+			resetAns ();
 		}
 
 		if (showPanel) {			
@@ -298,6 +324,16 @@ public class GameController_fishing : MonoBehaviour {
 
 /*Click ResetBtn*/
 	public void clickReset () {
+		useranswer = "null";
+		buttonname = "reset";
+		status = "-";
+		teaching = "no";
+		script_fishing_savedata.getGameData ();
+
+		resetAns ();
+	}
+
+	void resetAns () {
 		for (int i = 0; i < 10; i++) {
 			catching[i] = false;
 			fish[i].SetActive(true);
@@ -308,7 +344,5 @@ public class GameController_fishing : MonoBehaviour {
 		label3.SetActive(true);
 		Debug.Log("Reset user_ans: " + user_ans);
 	}
-
-	
 
 }

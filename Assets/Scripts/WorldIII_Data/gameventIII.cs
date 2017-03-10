@@ -285,7 +285,7 @@ public class gameventIII : MonoBehaviour {
     public void turn(){
 
     	//gamevent.p = 2;
-    	p = 6;//Random.Range(1,7);
+    	p = Random.Range(1,7);
 		Dice.SetActive(true);
 		Dice.transform.position = character.transform.position + new  Vector3(0f,-1f,-2.5f);//(-2.7f,1f,-7.5f);
 		diceAni.SetBool("setPosi",true);

@@ -17,6 +17,9 @@ public class testbankDBHandler_fishing : MonoBehaviour {
 	public static string ques_id, ques_kind;
 	public static string[] fishNum = new string[10];
 	public static List<string> Anslist = new List<string>();
+
+/*Pass data*/
+	public string question, answer;
 	
 	// Use this for initialization
 	void Start () {
@@ -48,7 +51,7 @@ public class testbankDBHandler_fishing : MonoBehaviour {
 		}
 		WWW www = new WWW(strurl, form);
 		yield return www;
-		Debug.Log("testbank: " + www.text);
+		// Debug.Log("testbank: " + www.text);
 
 		string str = www.text;
 		string[] str_arr2 = str.Split('%');
@@ -81,6 +84,11 @@ public class testbankDBHandler_fishing : MonoBehaviour {
 /*PRINT Fishing info*/		
 		// Debug.Log("Fishing INFO: " + "ques_id: " + ques_id + " / a: " + a + " / hints.Length: " + hints.Length + " / hints2: " + hints2 + " / Anslist.Count: " + Anslist.Count);
 
+		question = QuesText.text;
+		for (int i = 0; i < Anslist.Count; i++) {
+			answer += "[" + i + "] " + Anslist[i];
+		}
+		// print(answer);
 
 	}
 

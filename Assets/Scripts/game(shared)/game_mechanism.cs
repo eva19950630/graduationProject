@@ -18,6 +18,7 @@ public class game_mechanism : MonoBehaviour {
 	void Update () {
 		gid3_isTimesup = SecondText_quickanswer.quick_isTimesup;
 	}
+	
 
 /*Enter teaching scene*/
 	public static void enterTeaching (int g_id) {

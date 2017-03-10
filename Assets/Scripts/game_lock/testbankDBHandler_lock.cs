@@ -5,12 +5,14 @@ using System.Collections.Generic;
 
 public class testbankDBHandler_lock : MonoBehaviour {
 	public string strurl;
+	public string[] str_arr;
 	
 	public Text QuesText;
 
-	public string[] str_arr;
-
 	public static string ques_id, ques_kind, Ans, hint;
+
+/*Pass data*/
+	public string question, answer;
 
 	// Use this for initialization
 	void Start () {
@@ -39,7 +41,7 @@ public class testbankDBHandler_lock : MonoBehaviour {
 		}
 		WWW www = new WWW(strurl, form);
 		yield return www;
-		Debug.Log("testbank: " + www.text);
+		// Debug.Log("testbank: " + www.text);
 
 		string str = www.text;
 		str_arr = str.Split('@');
@@ -53,5 +55,8 @@ public class testbankDBHandler_lock : MonoBehaviour {
 /*PRINT Lock info*/		
 		Debug.Log("Lock INFO: " + "ques_id: " + ques_id + " / ques_kind: " + ques_kind + " / Ans: " + Ans + " / hint: " + hint);
 
+		question = QuesText.text;
+		answer = Ans;
 	}
+
 }

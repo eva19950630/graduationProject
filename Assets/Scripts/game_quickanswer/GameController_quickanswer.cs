@@ -30,6 +30,14 @@ public class GameController_quickanswer : MonoBehaviour {
 	//check boss or normal world
 	public bool isboss = false;
 
+/*Pass data*/
+	public string useranswer, status, teaching;
+	private saveGameData_quickanswer script_quickanswer_savedata;
+
+	void Awake () {
+		script_quickanswer_savedata = GetComponent<saveGameData_quickanswer> ();
+	}
+
 	// Use this for initialization
 	void Start () {
 		if(GameObject.Find("BossSaveData"))
@@ -109,20 +117,50 @@ public class GameController_quickanswer : MonoBehaviour {
 			}
 		}
 
+		if (user_ans == null)
+			user_ans = "null";
+
 		if (user_ans == Ans) {
+			useranswer = ""+user_ans;
+			status = "right";
+			teaching = "no";
+			script_quickanswer_savedata.getGameData ();
+
 			isRight = true;
+			user_ans = null;
 		} else {
-			if (k == 0) {		
+			if (k == 0) {	
+				useranswer = ""+user_ans;
+				status = "wrong";
+				teaching = "no";
+				script_quickanswer_savedata.getGameData ();
+
 				mainren_wrong1.sprite = wrong_fillred[0];
 				wrongID_arr[0] = ques_id;
 				wrongQues_arr[0] = ques_kind;
+
+				user_ans = null;
 				// print(wrongID_arr[0]);
 			} else if (k == 1) {
+				useranswer = ""+user_ans;
+				status = "wrong";
+				teaching = "no";
+				script_quickanswer_savedata.getGameData ();
+
 				mainren_wrong2.sprite = wrong_fillred[1];
 				wrongID_arr[1] = ques_id;
 				wrongQues_arr[1] = ques_kind;
 				// print(wrongID_arr[1]);
+
+				user_ans = null;
 			} else {
+				useranswer = ""+user_ans;
+				status = "wrong";
+				teaching = "yes";
+				script_quickanswer_savedata.getGameData ();
+
+				user_ans = null;
+
 				mainren_wrong3.sprite = wrong_fillred[2];
 				wrongID_arr[2] = ques_id;
 				wrongQues_arr[2] = ques_kind;
