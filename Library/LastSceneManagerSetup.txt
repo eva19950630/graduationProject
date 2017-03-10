@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/Game/QuickanswerScene.unity
+=======
+- path: Assets/Scenes/Chapter_WorldTwo.unity
+>>>>>>> b8f947e73303b0bbb27dbe9205a40c05fe9a1f4c
   isLoaded: 1
   isActive: 1

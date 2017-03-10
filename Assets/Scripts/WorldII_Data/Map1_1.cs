@@ -117,7 +117,18 @@ public class Map1_1 : MonoBehaviour {
 	};
 	//clue
 	public static string[] clue = new string[10]
-	{"\"4\"\n", "吃\n", "乾淨\n", "泥巴\n", "P\n", "捲", "食物\n", "粉紅\n", "生肖\n", "鼻子"};
+	{
+		"藍 相鄰在 黑 的左邊",
+		"黃 旁邊只有一個人",
+		"綠 相鄰在 紫 的左邊",
+		"紫 和 藍 是對稱的位置",
+		"橘 在 紅 的右邊而且是離 黃 最遠的人",
+		"總共有 7 個人",
+		"黑 在 紅 跟 藍 的中間",
+		"紫 相鄰在 橘 的左邊",
+		"藍 在 黃 的旁邊",
+		"紅 的左邊跟右邊人數相同",
+	};
 	public static int clue_number = 0;
 	public static string cluelist_L, cluelist_R, ans_cluenum;
 	//W1-1 last ans
@@ -145,16 +156,16 @@ public class Map1_1 : MonoBehaviour {
 		cluelist_L = "";
 		cluelist_R = "";
 		ans_cluenum = "獲得的提示數量\n" + clue_number + "/10";
-		clue[0] = "\"4\"\n";//蓮花
-		clue[1] = "吃\n";	//桃子
-		clue[2] = "乾淨\n";	//海藻
-		clue[3] = "泥巴\n";	//耙子
-		clue[4] = "\"P\"";	//筷子
-		clue[5] = "捲\n";	//兔子
-		clue[6] = "食物\n";	//施萱
-		clue[7] = "粉紅\n";	//蝦子
-		clue[8] = "生肖\n";	//蝸牛
-		clue[9] = "鼻子";
+		clue[0] = "藍 相鄰在 黑 的左邊\n";
+		clue[1] = "黃 旁邊只有一個人\n";	
+		clue[2] = "綠 相鄰在 紫 的左邊\n";	
+		clue[3] = "紫 和 藍 是對稱的位置\n";	
+		clue[4] = "橘 是離 黃 最遠的人\n";	
+		clue[5] = "總共有 7 個人\n";	
+		clue[6] = "黑 在 紅 跟 藍 的中間\n";	
+		clue[7] = "紫 相鄰在 橘 的左邊\n";	
+		clue[8] = "藍 在 黃 的旁邊\n";	
+		clue[9] = "紅 的左邊跟右邊人數相同\n";
 
 
 		for(i = 0; i < 16; i++){
@@ -195,17 +206,9 @@ public class Map1_1 : MonoBehaviour {
 		for(i=1;i<16;i++){
 			if(world1_game[i] == -1){
 				world1_game[i] = 4;
+				// world1_game[i] = 1;
 			}
 		}
-		// count = 4;
-		// while(count > 0){
-		// 	sign = Random.Range(1,15);
-		// 	if(world1_game[sign] == -1){
-		// 		world1_game[sign] = 4;
-		// 		count --;
-		// 	}
-		// }
-		//Clone();
 	}
 	
 	// Update is called once per frame

@@ -39,7 +39,7 @@ public class fightAnim_boss : MonoBehaviour {
 	}
 
 	public void getgame(){
-		gameNum = Random.Range(1,4);
+		gameNum = Random.Range(1,6);
 		BossSave.saved();
 		print("gameNum = " + gameNum);
 		if(!BossSave.gamefinish){
@@ -68,6 +68,12 @@ public class fightAnim_boss : MonoBehaviour {
 				break;
 			case 3:
 				SceneManager.LoadScene("QuickanswerScene");
+				break;
+			case 4:
+				SceneManager.LoadScene("BalanceScene");
+				break;
+			case 5:
+				SceneManager.LoadScene("BuyingScene");
 				break;
 			case -1:
 				print("error: gameNum = -1");
@@ -130,6 +136,12 @@ public class fightAnim_boss : MonoBehaviour {
 				break;
 			case 3:
 				sign.SetInteger("number",3);
+				break;
+			case 4:
+				sign.SetInteger("number",4);
+				break;
+			case 5:
+				sign.SetInteger("number",5);
 				break;
 		}
 	}

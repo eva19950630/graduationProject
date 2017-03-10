@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Linq;
+using UnityEngine.UI;
 // using System.Collections.Generic;
 
 public class Map1_2 : MonoBehaviour {
@@ -13,6 +14,12 @@ public class Map1_2 : MonoBehaviour {
 	public int sign, count, i;
 	public static bool undo;
 	//map info
+	public static int chance_times;
+	public static bool guessfinish;
+	public static string history;
+	public static int history_count;
+	public static Text answerList;
+	// public static Vector2 rectSize = answerList.GetComponent<RectTransform>().sizeDelta;
 	public static int[,] world1 = new int[8,9]
 	{
 		// ↓ X ; → Y ;
@@ -150,12 +157,15 @@ public class Map1_2 : MonoBehaviour {
 		
 	};
 	//clue
-	public static string[] clue = new string[10]
-	{"\"4\"\n", "吃\n", "乾淨\n", "泥巴\n", "P\n", "捲", "食物\n", "粉紅\n", "生肖\n", "鼻子"};
-	public static int clue_number = 0;
-	public static string cluelist_L, cluelist_R, ans_cluenum;
-	//W1-1 last ans
-	public static int answer = 7;
+	// public static string[] clue = new string[10]
+	// {"\"4\"\n", "吃\n", "乾淨\n", "泥巴\n", "P\n", "捲", "食物\n", "粉紅\n", "生肖\n", "鼻子"};
+	// public static int clue_number = 0;
+	// public static string cluelist_L, cluelist_R, ans_cluenum;
+	//W1-2 last ans
+	public static int answer1 = -1;
+	public static int answer2 = -1;
+	public static int answer3 = -1;
+	public static int answer4 = -1;
 	//music status
 	public static bool music_stat;
 	// Use this for initialization
@@ -163,10 +173,16 @@ public class Map1_2 : MonoBehaviour {
 	void Start () {
 
 		//initial clues
-		clue_number = 0;
-		cluelist_L = "";
-		cluelist_R = "";
-		ans_cluenum = "";
+			// clue_number = 0;
+			// cluelist_L = "";
+			// cluelist_R = "";
+			// ans_cluenum = "";
+		//initial chance times
+		chance_times = 0;
+		guessfinish = false;
+		history = "密碼     結果\n";
+		history_count = 1;
+		// rectSize = new Vector2 (rectSize.x, rectSize.y + 50);
 
 		//initial music status
 		music_stat = true;
@@ -176,20 +192,9 @@ public class Map1_2 : MonoBehaviour {
 
 		//world1_floor = GameObject.FindGameObjectsWithTag("floor").OrderBy( go => go.name ).ToArray();
 		undo = false;
-		cluelist_L = "";
-		cluelist_R = "";
-		ans_cluenum = "獲得的提示數量\n" + clue_number + "/10";
-		clue[0] = "\"4\"\n";//蓮花
-		clue[1] = "吃\n";	//桃子
-		clue[2] = "乾淨\n";	//海藻
-		clue[3] = "泥巴\n";	//耙子
-		clue[4] = "\"P\"";	//筷子
-		clue[5] = "捲\n";	//兔子
-		clue[6] = "食物\n";	//施萱
-		clue[7] = "粉紅\n";	//蝦子
-		clue[8] = "生肖\n";	//蝸牛
-		clue[9] = "鼻子";
+		// ans_cluenum = "獲得的提示數量\n" + clue_number + "/10";
 
+		buildquestion();
 
 		for(i = 0; i < 26; i++){
 			world1_game[i] = -1;
@@ -305,31 +310,82 @@ public class Map1_2 : MonoBehaviour {
 		undo = true;
 	}
 
-	public static string getclue(){
-		
-		string clue_str;
-
-		if(clue_number == 10){
-			clue_str = "你已經得到所有提示囉!";
-		}else{
-			clue_number++;
-			promptShow = true;
-			clue_str = "獲得新提示\n  " + clue[clue_number];
-			
-			if(clue_number < 6){
-				cluelist_L += clue[clue_number-1];				
-			}else{
-				cluelist_R += clue[clue_number-1];				
-			}
-
-			ans_cluenum = "獲得的提示數量\n" + clue_number + "/10";
-		}
-		return clue_str;
+	public static void getclue(){
+		chance_times ++;
 	}
 
 	public static void showPrompt_clue(){
 		Debug.Log("show get Clue Prompt.");
 		promptShow = false;
+	}
+
+	private void buildquestion(){
+		answer1 = Random.Range(0,9);
+		answer2 = Random.Range(0,9);
+		answer3 = Random.Range(0,9);
+		answer4 = Random.Range(0,9);
+		while(answer1 == 0)
+			answer1 = Random.Range(0,9);
+		while(answer2 == answer1)
+			answer2 = Random.Range(0,9);
+		while(answer3 == answer2 || answer3 == answer1)
+			answer3 = Random.Range(0,9);
+		while(answer4 == answer3 || answer4 == answer2 || answer4 == answer1)
+			answer4 = Random.Range(0,9);
+
+		print(answer1 + " " + answer2 + " " + answer3 + " " + answer4);
+	}
+
+	public static string checkAns(int a, int b, int c, int d){
+		string result = "";
+		int A = 0;
+		int B = 0;
+		int No = 0;
+
+		if(a == answer1){
+			A++;
+		}else if(a == answer2 || a == answer3 || a == answer4){
+			B++;
+		}else{
+			No++;
+		}
+
+		if(b == answer2){
+			A++;
+		}else if(b == answer1 || b == answer3 || b == answer4){
+			B++;
+		}else{
+			No++;
+		}
+
+		if(c == answer3){
+			A++;
+		}else if(c == answer1 || c == answer2 || c == answer4){
+			B++;
+		}else{
+			No++;
+		}
+
+		if(d == answer4){
+			A++;
+		}else if(d == answer1 || d == answer2 || d == answer3){
+			B++;
+		}else{
+			No++;
+		}
+
+		result = (A + "A" + B + "B");
+		// print(a +" "+  b +" "+ c +" "+ d + "    " + A + "A" + B + "B //No = " + No);		
+		
+		history += (a.ToString() + b.ToString() + c.ToString() + d.ToString() + "     " + result + "\n");
+		result = (A + " A " + B + " B");
+		// answerList.rectTransform.sizeDelta = rectSize;
+		// answerList.transform.position = 
+		// 	new Vector3(answerList.transform.position.x, answerList.transform.position.y-25f, answerList.transform.position.z);
+		// answerList.transform.position = ()
+		chance_times --;
+		history_count ++;
+		return result;
 	}
 
 }

@@ -27,7 +27,7 @@ public class BackToWorld : MonoBehaviour {
 		//Anslist.Clear();
 		if(isboss)
 			SceneManager.LoadScene("BossStage");
-		else if(GameObject.Find("datasaverI"))
+		else if(GameObject.Find("datasaver"))
 			SceneManager.LoadScene("Chapter_WorldOne");
 		else if(GameObject.Find("datasaverII"))
 			SceneManager.LoadScene("Chapter_WorldTwo");
