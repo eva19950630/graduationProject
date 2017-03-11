@@ -10,7 +10,7 @@ public class menu : MonoBehaviour {
 	// public Button PK;
 	public Animator flyaway;
 	public AudioSource rocket_audio;
-
+	public GameObject StartButton;
 	// Use this for initialization
 	void Start () {
 		// Story.image.color = new Color(204, 204, 204);
@@ -24,6 +24,7 @@ public class menu : MonoBehaviour {
 	}
 
 	public void startGame(){
+		StartButton.SetActive(false);
 		rocket_audio.Play();
 		flyaway.SetBool("gameStart",true);
 	}

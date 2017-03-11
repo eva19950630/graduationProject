@@ -333,7 +333,7 @@ public class Map1_2 : MonoBehaviour {
 		while(answer4 == answer3 || answer4 == answer2 || answer4 == answer1)
 			answer4 = Random.Range(0,9);
 
-		print(answer1 + " " + answer2 + " " + answer3 + " " + answer4);
+		// print(answer1 + " " + answer2 + " " + answer3 + " " + answer4);
 	}
 
 	public static string checkAns(int a, int b, int c, int d){

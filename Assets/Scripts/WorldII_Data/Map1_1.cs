@@ -132,7 +132,7 @@ public class Map1_1 : MonoBehaviour {
 	public static int clue_number = 0;
 	public static string cluelist_L, cluelist_R, ans_cluenum;
 	//W1-1 last ans
-	public static int answer = 7;
+	public static int answer = 4;
 	//music status
 	public static bool music_stat;
 	// Use this for initialization
