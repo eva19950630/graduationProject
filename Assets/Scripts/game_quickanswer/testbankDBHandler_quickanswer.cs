@@ -13,6 +13,8 @@ public class testbankDBHandler_quickanswer : MonoBehaviour {
 	public List<string> ques_list = new List<string>();
 	public int c = 0;
 
+	private string w1, w2, w3;
+
 	public static string ques_id, ques_kind, Ans;
 	public static bool recallRanQues;
 
@@ -28,6 +30,8 @@ public class testbankDBHandler_quickanswer : MonoBehaviour {
 			str_arr[i] = "";
 		for (int i = 0; i < str_arr2.Length; i++)
 			str_arr2[i] = "";
+		for (int i = 0; i < selectAnsText.Length; i++)
+			selectAnsText[i].text = "";
 		ques_id = "";
 		Ans = "";
 		recallRanQues = false;
@@ -102,6 +106,10 @@ public class testbankDBHandler_quickanswer : MonoBehaviour {
 		ques_kind = str_arr2[1];
 		QuesText.text = str_arr2[2];
 		Ans = str_arr2[3];
+
+		w1 = str_arr2[4];
+		w2 = str_arr2[5];
+		w3 = str_arr2[6];
 		
 		ranSelectAnsNum ();
 
@@ -111,18 +119,22 @@ public class testbankDBHandler_quickanswer : MonoBehaviour {
 
 	void ranSelectAnsNum () {
 		int r = Random.Range(0, 4);
-		for (int i = 0; i < 4; i++) {
-			if (r == i)
-				selectAnsText[i].text = Ans;
+		// print(r);
+		string[] selectans = new string[4] {Ans, w1, w2, w3};
+		int i = 0;
+		while (selectAnsText[r].text == "" || i < 4) {
+			selectAnsText[i].text = selectans[r];
+			if (r == 3)
+				r = 0;
 			else
-				selectAnsText[i].text = ""+ Random.Range(0, 5000);
+				r++;
+			i++;
 		}
 	}
 
 
 	public static void reRanQues () {
 		recallRanQues = true;
-		
 	}
 
 }
