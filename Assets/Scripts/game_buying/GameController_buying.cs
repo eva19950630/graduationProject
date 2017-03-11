@@ -23,6 +23,14 @@ public class GameController_buying : MonoBehaviour {
 	public static bool gamestate, isRight, isboss;
 	public static int k, gID;
 
+/*Pass data*/
+	public string useranswer, buttonname, status, teaching;
+	private saveGameData_buying script_buying_savedata;
+
+	void Awake () {
+		script_buying_savedata = GetComponent<saveGameData_buying> ();
+	}
+
 	// Use this for initialization
 	void Start () {
 		if(GameObject.Find("BossSaveData"))
@@ -94,6 +102,12 @@ public class GameController_buying : MonoBehaviour {
 
 /*Click reset btn and reset all weights number*/
 	public void clickResetBtn () {
+		useranswer = "0";
+		buttonname = "reset";
+		status = "-";
+		teaching = "no";
+		script_buying_savedata.getGameData ();
+
 		pigero_count = 0;
 		pigdy_count = 0;
 		lollipig_count = 0;
@@ -119,13 +133,37 @@ public class GameController_buying : MonoBehaviour {
 		print ("Ans: " + Ans + " / user_Ans: " + user_Ans);
 
 		if (user_Ans == ans_int) {
+			useranswer = ""+user_Ans;
+			buttonname = "finish";
+			status = "right";
+			teaching = "no";
+			script_buying_savedata.getGameData ();
+
 			isRight = true;
 		} else {
-			if (k == 0) {		
+			if (k == 0) {
+				useranswer = ""+user_Ans;	
+				buttonname = "finish";
+				status = "wrong";
+				teaching = "no";
+				script_buying_savedata.getGameData ();
+
 				mainren_wrong1.sprite = wrong_fillred[0];
 			} else if (k == 1) {
+				useranswer = ""+user_Ans;	
+				buttonname = "finish";
+				status = "wrong";
+				teaching = "no";
+				script_buying_savedata.getGameData ();
+
 				mainren_wrong2.sprite = wrong_fillred[1];
 			} else {
+				useranswer = ""+user_Ans;	
+				buttonname = "finish";
+				status = "wrong";
+				teaching = "yes";
+				script_buying_savedata.getGameData ();
+
 				mainren_wrong3.sprite = wrong_fillred[2];
 				finishBtn.SetActive(false);
 				gamestate = false;

@@ -11,8 +11,13 @@ public class SecondText_lock : MonoBehaviour {
 	public float ti = 0;
 	public int a = 0;
 	public bool isboss = false;
+	public bool isTimesup = false;
 
 	private int gid;
+
+/*Pass data*/
+	public float ti2 = 0;
+	public int answertime = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -27,6 +32,11 @@ public class SecondText_lock : MonoBehaviour {
 		gid = GameController_lock.gID;
 		bool gamestate = GameController_lock.gamestate;
 
+		if (gamestate == true) {
+			ti2 += Time.deltaTime;
+			answertime = (int)ti2;
+		}
+
 		if (isboss) {
 			if (gamestate == true) {
 				ti -= Time.deltaTime;
@@ -38,6 +48,8 @@ public class SecondText_lock : MonoBehaviour {
 					bombAni.Play ("bomb_quick");
 				}
 				if (ti <= -60) {
+					isTimesup = true;
+
 					bombAni.enabled = false;
 					wrongsymbol.SetActive(false);
 					bomb.SetActive(false);
@@ -47,6 +59,8 @@ public class SecondText_lock : MonoBehaviour {
 					feedbackPanel.SetActive(true);
 					feedbackAni.Play("lock_timesup");
 				}
+				if (ti <= -60.03f)
+					isTimesup = false;
 				if (ti <= -62) {
 					game_mechanism.enterTeaching(gid);
 				}
@@ -69,6 +83,8 @@ public class SecondText_lock : MonoBehaviour {
 					bombAni.Play ("bomb_quick");
 				}
 				if (ti <= -120) {
+					isTimesup = true;
+
 					bombAni.enabled = false;
 					wrongsymbol.SetActive(false);
 					bomb.SetActive(false);
@@ -78,6 +94,8 @@ public class SecondText_lock : MonoBehaviour {
 					feedbackPanel.SetActive(true);
 					feedbackAni.Play("lock_timesup");
 				}
+				if (ti <= -120.03f)
+					isTimesup = false;
 				if (ti <= -122) {
 					game_mechanism.enterTeaching(gid);
 				}

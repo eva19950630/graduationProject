@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController_balance : MonoBehaviour {
-	public Text weight1000g_Text, weight500g_Text, weight10g_Text, weight1g_Text, hintText;
+	public Text weight1000g_Text, weight100g_Text, weight10g_Text, weight1g_Text, hintText;
 	public Sprite[] wrong_fillred = new Sprite[3];
 	public Sprite[] balanceSprite = new Sprite[3];
 	public SpriteRenderer mainren_wrong1, mainren_wrong2, mainren_wrong3, mainren_balance;
@@ -18,6 +18,14 @@ public class GameController_balance : MonoBehaviour {
 
 	public static bool gamestate, isRight, isboss;
 	public static int k, gID;
+
+/*Pass data*/
+	public string useranswer, buttonname, status, teaching;
+	private saveGameData_balance script_balance_savedata;
+
+	void Awake () {
+		script_balance_savedata = GetComponent<saveGameData_balance> ();
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -32,8 +40,7 @@ public class GameController_balance : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {		
-		// ques_id = testbankDBHandler_balance.ques_id;
+	void Update () {
 		Ans = testbankDBHandler_balance.Ans;
 		hint = testbankDBHandler_balance.hint;
 
@@ -56,15 +63,15 @@ public class GameController_balance : MonoBehaviour {
 				weight_num1 = 0;
 			// print("weight_num1: " + weight_num1);
 			weight1000g_Text.text = ""+weight_num1;
-		} else if (weightbtnName == "weightbtn_500g") {
+		} else if (weightbtnName == "weightbtn_100g") {
 			if (weight_num2 < 10)
 				weight_num2++;
 			else
 				weight_num2 = 0;
 			// print("weight_num2: " + weight_num2);
-			weight500g_Text.text = ""+weight_num2;
+			weight100g_Text.text = ""+weight_num2;
 		} else if (weightbtnName == "weightbtn_10g") {
-			if (weight_num3 < 50)
+			if (weight_num3 < 10)
 				weight_num3++;
 			else
 				weight_num3 = 0;
@@ -83,12 +90,18 @@ public class GameController_balance : MonoBehaviour {
 
 /*Click reset btn and reset all weights number*/
 	public void clickResetBtn () {
+		useranswer = "0";
+		buttonname = "reset";
+		status = "-";
+		teaching = "no";
+		script_balance_savedata.getGameData ();
+
 		weight_num1 = 0;
 		weight_num2 = 0;
 		weight_num3 = 0;
 		weight_num4 = 0;
 		weight1000g_Text.text = ""+weight_num1;
-		weight500g_Text.text = ""+weight_num2;
+		weight100g_Text.text = ""+weight_num2;
 		weight10g_Text.text = ""+weight_num3;
 		weight1g_Text.text = ""+weight_num4;
 	}
@@ -98,18 +111,42 @@ public class GameController_balance : MonoBehaviour {
 		gamestate = false;
 
 		ans_int = System.Convert.ToInt32(Ans);
-		user_Ans = weight_num1*1000 + weight_num2*500 + weight_num3*10+ weight_num4;
+		user_Ans = weight_num1*1000 + weight_num2*100 + weight_num3*10+ weight_num4;
 		
 		print ("Ans: " + Ans + " / user_Ans: " + user_Ans);
 
 		if (user_Ans == ans_int) {
+			useranswer = ""+user_Ans;
+			buttonname = "finish";
+			status = "right";
+			teaching = "no";
+			script_balance_savedata.getGameData ();
+
 			isRight = true;
 		} else {
-			if (k == 0) {		
+			if (k == 0) {
+				useranswer = ""+user_Ans;	
+				buttonname = "finish";
+				status = "wrong";
+				teaching = "no";
+				script_balance_savedata.getGameData ();
+
 				mainren_wrong1.sprite = wrong_fillred[0];
 			} else if (k == 1) {
+				useranswer = ""+user_Ans;
+				buttonname = "finish";
+				status = "wrong";
+				teaching = "no";
+				script_balance_savedata.getGameData ();
+
 				mainren_wrong2.sprite = wrong_fillred[1];
 			} else {
+				useranswer = ""+user_Ans;
+				buttonname = "finish";
+				status = "wrong";
+				teaching = "yes";
+				script_balance_savedata.getGameData ();
+
 				mainren_wrong3.sprite = wrong_fillred[2];
 				finishBtn.SetActive(false);
 				gamestate = false;

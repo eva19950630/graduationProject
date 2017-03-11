@@ -12,6 +12,9 @@ public class testbankDBHandler_balance : MonoBehaviour {
 
 	public static string ques_id, ques_kind, Ans, hint;
 
+/*Pass data*/
+	public string question, answer;
+
 	// Use this for initialization
 	void Start () {
 		strurl = "http://163.21.245.190/graduationProject/question/numberQues_normal.php";
@@ -39,7 +42,7 @@ public class testbankDBHandler_balance : MonoBehaviour {
 		}
 		WWW www = new WWW(strurl, form);
 		yield return www;
-		Debug.Log("testbank: " + www.text);
+		// Debug.Log("testbank: " + www.text);
 
 		string str = www.text;
 		str_arr = str.Split('@');
@@ -53,5 +56,7 @@ public class testbankDBHandler_balance : MonoBehaviour {
 /*PRINT Balance info*/
 		Debug.Log("Balance INFO: " + "ques_id: " + ques_id + " / ques_kind: " + ques_kind + " / Ans: " + Ans + " / hint: " + hint);
 
+		question = QuesText.text;
+		answer = Ans;
 	}
 }
