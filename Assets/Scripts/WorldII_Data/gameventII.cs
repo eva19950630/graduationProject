@@ -48,6 +48,16 @@ public class gameventII : MonoBehaviour {
 // Panel for the end question
 	public GameObject correctPanel;
 	public GameObject wrongPanel;
+//quesstion sprites
+	public Sprite ask_image;
+	public Sprite Red;
+	public Sprite Orange;
+	public Sprite Yellow;
+	public Sprite Green;
+	public Sprite Blue;
+	public Sprite Purple;
+	public Sprite Black;
+	public Image fifth;
 
 	// Use this for initialization
 	void Start () {
@@ -219,6 +229,30 @@ public class gameventII : MonoBehaviour {
 
 	public void selectans(int selected){
 		ans_choosed = selected;
+		switch(selected){
+			case 1:
+				fifth.overrideSprite = Red;
+				break;
+			case 2:
+				fifth.overrideSprite = Orange;
+				break;
+			case 3:
+				fifth.overrideSprite = Yellow;
+				break;
+			case 4:
+				fifth.overrideSprite = Green;
+				break;
+			case 5:
+				fifth.overrideSprite = Blue;
+				break;
+			case 6:
+				fifth.overrideSprite = Purple;
+				break;
+			case 7:
+				fifth.overrideSprite = Black;
+				break;
+		
+		}
 		// checkAns();
 	}
 
@@ -235,7 +269,7 @@ public class gameventII : MonoBehaviour {
 			//show wrong image
 			Debug.Log("wrong ans!");
 			pass_panel.SetActive(false);
-
+			fifth.overrideSprite = ask_image;
 			wrongPanel.SetActive(true);
 			// initial();
 			// goNext = true;
