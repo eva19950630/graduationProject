@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 
 public class saveGameData_fishing : MonoBehaviour {
-	public string question, answer, useranswer, button, status, teaching, answertime, username, fishingdata, fishingsave_url;
+	public string gamename, question, answer, useranswer, button, status, teaching, answertime, username, gamedata, gamesave_url;
 	public DateTime Now;
 
 	private bool isTimesup;
@@ -21,8 +21,9 @@ public class saveGameData_fishing : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		fishingsave_url = "http://163.21.245.190/graduationProject/game/gamesave_fishing.php";
+		gamesave_url = "http://163.21.245.190/graduationProject/game/gamesave.php";
 
+		gamename = "";
 		question = "";
 		answer = "";
 		useranswer = "";
@@ -31,7 +32,7 @@ public class saveGameData_fishing : MonoBehaviour {
 		teaching = "";
 		answertime = "";
 		username = "";
-		fishingdata = "";
+		gamedata = "";
 	}
 	
 	// Update is called once per frame
@@ -46,13 +47,14 @@ public class saveGameData_fishing : MonoBehaviour {
 
 /*get question, answer, useranswer, button, status, teaching, time ,answertime, username*/
 	public void getGameData () {
+		gamename = "大家來撈魚";
 		question = script_fishing_testbank.question;
 		answer = script_fishing_testbank.answer;
 		answertime = ""+script_fishing_sec.answertime;
 		username = UserDataSave.user_name;
 		if (isTimesup) {
 			useranswer = "-";
-			button = "no";
+			button = "no click";
 			status = "timesup";
 			teaching = "yes";
 		} else {
@@ -62,22 +64,22 @@ public class saveGameData_fishing : MonoBehaviour {
 			teaching = script_fishing_gc.teaching;
 		}
 
-		fishingdata = question + "@" + answer + "@" + useranswer + "@" + button + "@" + status + "@" + teaching + "@" + Now + "@" + answertime + "@" + username;
-		// print("[SaveGameData] " + fishingdata);
+		gamedata = gamename + "@" + question + "@" + answer + "@" + useranswer + "@" + button + "@" + status + "@" + teaching + "@" + answertime + "@" + Now + "@" + username;		
+		// print("[SaveGameData] " + gamedata);
 
-		StartCoroutine(handlerGameFishingData(fishingdata));
+		StartCoroutine(handlerGameData(gamedata));
 	}
 
-	IEnumerator handlerGameFishingData (string fishingdata) {
+	IEnumerator handlerGameData (string gamedata) {
 		WWWForm form = new WWWForm();
 		Dictionary<string, string> data = new Dictionary<string, string>();
-		data.Add("fishingdata", fishingdata);
+		data.Add("gamedata", gamedata);
 
 		foreach (KeyValuePair<string, string> post in data) {
 			form.AddField(post.Key, post.Value);
 		}
 
-		WWW www = new WWW(fishingsave_url, form);
+		WWW www = new WWW(gamesave_url, form);
 		yield return www;
 		Debug.Log(www.text);
 		

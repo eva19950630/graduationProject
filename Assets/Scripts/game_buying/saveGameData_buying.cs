@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 
 public class saveGameData_buying : MonoBehaviour {
-	public string question, answer, useranswer, button, status, teaching, answertime, username, buyingdata, buyingsave_url;
+	public string gamename, question, answer, useranswer, button, status, teaching, answertime, username, gamedata, gamesave_url;
 	public DateTime Now;
 
 	private bool isTimesup;
@@ -21,8 +21,9 @@ public class saveGameData_buying : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		buyingsave_url = "http://163.21.245.190/graduationProject/game/gamesave_buying.php";
+		gamesave_url = "http://163.21.245.190/graduationProject/game/gamesave.php";
 
+		gamename = "";
 		question = "";
 		answer = "";
 		useranswer = "";
@@ -31,7 +32,7 @@ public class saveGameData_buying : MonoBehaviour {
 		teaching = "";
 		answertime = "";
 		username = "";
-		buyingdata = "";
+		gamedata = "";
 	}
 	
 	// Update is called once per frame
@@ -46,13 +47,14 @@ public class saveGameData_buying : MonoBehaviour {
 
 /*get question, answer, useranswer, button, status, teaching, time ,answertime, username*/
 	public void getGameData () {
+		gamename = "大家來買糖";
 		question = script_buying_testbank.question;
 		answer = script_buying_testbank.answer;
 		answertime = ""+script_buying_sec.answertime;
 		username = UserDataSave.user_name;
 		if (isTimesup) {
 			useranswer = "-";
-			button = "no";
+			button = "no click";
 			status = "timesup";
 			teaching = "yes";
 		} else {
@@ -62,22 +64,22 @@ public class saveGameData_buying : MonoBehaviour {
 			teaching = script_buying_gc.teaching;
 		}
 
-		buyingdata = question + "@" + answer + "@" + useranswer + "@" + button + "@" + status + "@" + teaching + "@" + Now + "@" + answertime + "@" + username;
-		// print("[SaveGameData] " + buyingdata);
+		gamedata = gamename + "@" + question + "@" + answer + "@" + useranswer + "@" + button + "@" + status + "@" + teaching + "@" + answertime + "@" + Now + "@" + username;		
+		// print("[SaveGameData] " + gamedata);
 
-		StartCoroutine(handlerGameBuyingData(buyingdata));
+		StartCoroutine(handlerGameData(gamedata));
 	}
 
-	IEnumerator handlerGameBuyingData (string buyingdata) {
+	IEnumerator handlerGameData (string gamedata) {
 		WWWForm form = new WWWForm();
 		Dictionary<string, string> data = new Dictionary<string, string>();
-		data.Add("buyingdata", buyingdata);
+		data.Add("gamedata", gamedata);
 
 		foreach (KeyValuePair<string, string> post in data) {
 			form.AddField(post.Key, post.Value);
 		}
 
-		WWW www = new WWW(buyingsave_url, form);
+		WWW www = new WWW(gamesave_url, form);
 		yield return www;
 		Debug.Log(www.text);
     }
