@@ -50,15 +50,15 @@ public class SecondText_quickanswer : MonoBehaviour {
 		if(isboss){
 			if (gamestate == true) {
 				ti -= Time.deltaTime;
-				a = (int)ti + 60;
+				a = (int)ti + 90;
 				sec.text = ""+ a;
 				clockAni.enabled = true;
-				if (ti <= -51) {
+				if (ti <= -81) {
 					sec.text = "0" + ""+ a;
 					sec.color = Color.red;
 					clockAni.Play ("clock_quick");
 				}
-				if (ti <= -60) {
+				if (ti <= -90) {
 					isTimesup = true;
 					quick_isTimesup = true;
 
@@ -70,13 +70,13 @@ public class SecondText_quickanswer : MonoBehaviour {
 					feedbackPanel.SetActive(true);
 					feedbackAni.Play("quickanswer_timesup");
 				}
-				if (ti <= -60.03f)
+				if (ti <= -90.03f)
 					isTimesup = false;
-				if (ti <= -62) {
+				if (ti <= -92) {
 					game_mechanism.enterTeaching(gid);
 				}
 			} else {
-				if (ti <= -51)
+				if (ti <= -81)
 					sec.text = "0" + ""+ a;
 				else
 					sec.text = ""+ a;
@@ -86,15 +86,15 @@ public class SecondText_quickanswer : MonoBehaviour {
 		}else{
 			if (gamestate == true) {
 				ti -= Time.deltaTime;
-				a = (int)ti + 100;
+				a = (int)ti + 180;
 				sec.text = ""+ a;
 				clockAni.enabled = true;
-				if (ti <= -91) {
+				if (ti <= -171) {
 					sec.text = "0" + ""+ a;
 					sec.color = Color.red;
 					clockAni.Play ("clock_quick");
 				}
-				if (ti <= -100) {
+				if (ti <= -180) {
 					isTimesup = true;			
 					quick_isTimesup = true;
 
@@ -106,13 +106,13 @@ public class SecondText_quickanswer : MonoBehaviour {
 					feedbackPanel.SetActive(true);
 					feedbackAni.Play("quickanswer_timesup");
 				}
-				if (ti <= -100.03f)
+				if (ti <= -180.03f)
 					isTimesup = false;
-				if (ti <= -102) {
+				if (ti <= -182) {
 					game_mechanism.enterTeaching(gid);
 				}
 			} else {
-				if (ti <= -91)
+				if (ti <= -171)
 					sec.text = "0" + ""+ a;
 				else
 					sec.text = ""+ a;

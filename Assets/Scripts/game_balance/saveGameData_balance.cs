@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 
 public class saveGameData_balance : MonoBehaviour {
-	public string question, answer, useranswer, button, status, teaching, answertime, username, balancedata, balancesave_url;
+	public string gamename, question, answer, useranswer, button, status, teaching, answertime, username, gamedata, gamesave_url;
 	public DateTime Now;
 
 	private bool isTimesup;
@@ -21,8 +21,9 @@ public class saveGameData_balance : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		balancesave_url = "http://163.21.245.190/graduationProject/game/gamesave_balance.php";
+		gamesave_url = "http://163.21.245.190/graduationProject/game/gamesave.php";
 
+		gamename = "";
 		question = "";
 		answer = "";
 		useranswer = "";
@@ -31,7 +32,7 @@ public class saveGameData_balance : MonoBehaviour {
 		teaching = "";
 		answertime = "";
 		username = "";
-		balancedata = "";
+		gamedata = "";
 	}
 	
 	// Update is called once per frame
@@ -46,13 +47,14 @@ public class saveGameData_balance : MonoBehaviour {
 
 /*get question, answer, useranswer, button, status, teaching, time ,answertime, username*/
 	public void getGameData () {
+		gamename = "大家來平衡";
 		question = script_balance_testbank.question;
 		answer = script_balance_testbank.answer;
 		answertime = ""+script_balance_sec.answertime;
 		username = UserDataSave.user_name;
 		if (isTimesup) {
 			useranswer = "-";
-			button = "no";
+			button = "no click";
 			status = "timesup";
 			teaching = "yes";
 		} else {
@@ -62,22 +64,22 @@ public class saveGameData_balance : MonoBehaviour {
 			teaching = script_balance_gc.teaching;
 		}
 
-		balancedata = question + "@" + answer + "@" + useranswer + "@" + button + "@" + status + "@" + teaching + "@" + Now + "@" + answertime + "@" + username;
-		// print("[SaveGameData] " + balancedata);
+		gamedata = gamename + "@" + question + "@" + answer + "@" + useranswer + "@" + button + "@" + status + "@" + teaching + "@" + answertime + "@" + Now + "@" + username;		
+		// print("[SaveGameData] " + gamedata);
 
-		StartCoroutine(handlerGameBalanceData(balancedata));
+		StartCoroutine(handlerGameData(gamedata));
 	}
 
-	IEnumerator handlerGameBalanceData (string balancedata) {
+	IEnumerator handlerGameData (string gamedata) {
 		WWWForm form = new WWWForm();
 		Dictionary<string, string> data = new Dictionary<string, string>();
-		data.Add("balancedata", balancedata);
+		data.Add("gamedata", gamedata);
 
 		foreach (KeyValuePair<string, string> post in data) {
 			form.AddField(post.Key, post.Value);
 		}
 
-		WWW www = new WWW(balancesave_url, form);
+		WWW www = new WWW(gamesave_url, form);
 		yield return www;
 		Debug.Log(www.text);
     }

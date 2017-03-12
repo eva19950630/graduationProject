@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 
 public class saveGameData_lock : MonoBehaviour {
-	public string question, answer, useranswer, status, teaching, answertime, username, lockdata, locksave_url;
+	public string gamename, question, answer, useranswer, button, status, teaching, answertime, username, gamedata, gamesave_url;
 	public DateTime Now;
 
 	private bool isTimesup;
@@ -21,16 +21,18 @@ public class saveGameData_lock : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		locksave_url = "http://163.21.245.190/graduationProject/game/gamesave_lock.php";
+		gamesave_url = "http://163.21.245.190/graduationProject/game/gamesave.php";
 
+		gamename = "";
 		question = "";
 		answer = "";
 		useranswer = "";
+		button = "";
 		status = "";
 		teaching = "";
 		answertime = "";
 		username = "";
-		lockdata = "";
+		gamedata = "";
 
 		// print(UserDataSave.user_name);
 	}
@@ -46,10 +48,12 @@ public class saveGameData_lock : MonoBehaviour {
 		// print (Now);
 	}
 
-/*get question, answer, useranswer, status, teaching, answertime, username*/
+/*get gamename, question, answer, useranswer, button, status, teaching, answertime, time, username*/
 	public void getGameData () {
+		gamename = "大家來解鎖";
 		question = script_lock_testbank.question;
 		answer = script_lock_testbank.answer;
+		button = "-";
 		answertime = ""+script_lock_sec.answertime;
 		username = UserDataSave.user_name;
 		if (isTimesup) {
@@ -62,22 +66,22 @@ public class saveGameData_lock : MonoBehaviour {
 			teaching = script_lock_gc.teaching;
 		}
 
-		lockdata = question + "@" + answer + "@" + useranswer + "@" + status + "@" + teaching + "@" + Now + "@" + answertime + "@" + username;		
-		// print("[SaveGameData] " + lockdata);
+		gamedata = gamename + "@" + question + "@" + answer + "@" + useranswer + "@" + button + "@" + status + "@" + teaching + "@" + answertime + "@" + Now + "@" + username;		
+		// print("[SaveGameData] " + gamedata);
 
-		StartCoroutine(handlerGameLockData(lockdata));
+		StartCoroutine(handlerGameData(gamedata));
 	}
 
-	IEnumerator handlerGameLockData (string lockdata) {
+	IEnumerator handlerGameData (string gamedata) {
 		WWWForm form = new WWWForm();
 		Dictionary<string, string> data = new Dictionary<string, string>();
-		data.Add("lockdata", lockdata);
+		data.Add("gamedata", gamedata);
 
 		foreach (KeyValuePair<string, string> post in data) {
 			form.AddField(post.Key, post.Value);
 		}
 
-		WWW www = new WWW(locksave_url, form);
+		WWW www = new WWW(gamesave_url, form);
 		yield return www;
 		Debug.Log(www.text);
 		

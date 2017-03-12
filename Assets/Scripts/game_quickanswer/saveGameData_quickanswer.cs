@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 
 public class saveGameData_quickanswer : MonoBehaviour {
-	public string question, answer, useranswer, status, teaching, answertime, username, quickanswerdata, quickanswersave_url;
+	public string gamename, question, answer, useranswer, button, status, teaching, answertime, username, gamedata, gamesave_url;
 	public DateTime Now;
 
 	private bool isTimesup;
@@ -21,16 +21,18 @@ public class saveGameData_quickanswer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		quickanswersave_url = "http://163.21.245.190/graduationProject/game/gamesave_quickanswer.php";
+		gamesave_url = "http://163.21.245.190/graduationProject/game/gamesave.php";
 
+		gamename = "";
 		question = "";
 		answer = "";
 		useranswer = "";
+		button = "";
 		status = "";
 		teaching = "";
 		answertime = "";
 		username = "";
-		quickanswerdata = "";
+		gamedata = "";
 	}
 	
 	// Update is called once per frame
@@ -45,8 +47,10 @@ public class saveGameData_quickanswer : MonoBehaviour {
 
 /*get question, answer, useranswer, status, teaching, time ,answertime, username*/
 	public void getGameData () {
+		gamename = "大家來蓋章";
 		question = script_quickanswer_testbank.question;
 		answer = script_quickanswer_testbank.answer;
+		button = "-";
 		answertime = ""+script_quickanswer_sec.answertime;
 		username = UserDataSave.user_name;
 		if (isTimesup) {
@@ -59,22 +63,22 @@ public class saveGameData_quickanswer : MonoBehaviour {
 			teaching = script_quickanswer_gc.teaching;
 		}
 
-		quickanswerdata = question + "@" + answer + "@" + useranswer + "@" + status + "@" + teaching + "@" + Now + "@" + answertime + "@" + username;
-		print("[SaveGameData] " + quickanswerdata);
+		gamedata = gamename + "@" + question + "@" + answer + "@" + useranswer + "@" + button + "@" + status + "@" + teaching + "@" + answertime + "@" + Now + "@" + username;		
+		// print("[SaveGameData] " + gamedata);
 
-		StartCoroutine(handlerGameQuickanswerData(quickanswerdata));
+		StartCoroutine(handlerGameData(gamedata));
 	}
 
-	IEnumerator handlerGameQuickanswerData (string buyingdata) {
+	IEnumerator handlerGameData (string gamedata) {
 		WWWForm form = new WWWForm();
 		Dictionary<string, string> data = new Dictionary<string, string>();
-		data.Add("quickanswerdata", quickanswerdata);
+		data.Add("gamedata", gamedata);
 
 		foreach (KeyValuePair<string, string> post in data) {
 			form.AddField(post.Key, post.Value);
 		}
 
-		WWW www = new WWW(quickanswersave_url, form);
+		WWW www = new WWW(gamesave_url, form);
 		yield return www;
 		Debug.Log(www.text);
     }
