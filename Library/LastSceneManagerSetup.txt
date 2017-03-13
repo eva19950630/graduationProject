@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/Game/FishingScene.unity
-=======
-- path: Assets/Scenes/Game/BuyingScene.unity
->>>>>>> 0c0e2390174a67607c4d0c2c655374d02c99e3b5
+- path: Assets/Scenes/login.unity
   isLoaded: 1
   isActive: 1
