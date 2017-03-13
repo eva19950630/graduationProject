@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/login.unity
+=======
+- path: Assets/Scenes/Chapter_WorldThree.unity
+>>>>>>> 5f81c128c9dd521289742bcb8127972748c98458
   isLoaded: 1
   isActive: 1
