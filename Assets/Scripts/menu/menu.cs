@@ -11,9 +11,13 @@ public class menu : MonoBehaviour {
 	public Animator flyaway;
 	public AudioSource rocket_audio;
 	public GameObject StartButton;
+	public GameObject history;
+	public bool openHistory = false;
 	// Use this for initialization
 	void Start () {
 		// Story.image.color = new Color(204, 204, 204);
+		history = GameObject.Find("course");
+		history.SetActive(false);
 		mode = 0;
 		rocket_audio.Stop();
 	}
@@ -41,5 +45,14 @@ public class menu : MonoBehaviour {
 
 	public void setMode(int modeNum){
 		mode = modeNum;
+	}
+
+	public void clickHistory(){
+		if(!openHistory)
+			history.SetActive(true);
+		else
+			history.SetActive(false);
+
+		openHistory = !openHistory;
 	}
 }
