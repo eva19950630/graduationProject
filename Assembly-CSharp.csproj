@@ -96,6 +96,7 @@
      <Compile Include="Assets\Scripts\game_quickanswer\testbankDBHandler_quickanswer.cs" />
      <Compile Include="Assets\Scripts\menu\buttonClick.cs" />
      <Compile Include="Assets\Scripts\menu\menu.cs" />
+     <Compile Include="Assets\Scripts\menu\showRecords.cs" />
      <Compile Include="Assets\Scripts\story_end.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

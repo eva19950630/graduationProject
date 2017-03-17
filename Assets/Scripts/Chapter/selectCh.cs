@@ -60,7 +60,7 @@ public class selectCh : MonoBehaviour {
 		button[3] = (button2.transform.position + new Vector3(0, 23f, 0));
 		button[4] = (button3.transform.position + new Vector3(0, 23f, 0));
 		//initial character position
-		player.transform.position = button[0];
+		player.transform.position = button[1];
 		// player.transform.position += new Vector3(0f, 16.5f, 0f);
 
 	}
@@ -71,14 +71,16 @@ public class selectCh : MonoBehaviour {
 	}
 
 	public void homeClick(){
-		home.interactable = false;
+		// home.interactable = false;
 		button0.interactable = false;
 		button1.interactable = false;
 		button2.interactable = false;
 		button3.interactable = false;	
-		ishome = true;
-		player.transform.position = button[0];
-		StartCoroutine (WAIT());
+		// ishome = true;
+		// player.transform.position = button[0];
+
+		// StartCoroutine (WAIT());
+		panelhome.SetActive(true);
 	}
 
 	public void continueGame(){
@@ -112,6 +114,7 @@ public class selectCh : MonoBehaviour {
 		// player.transform.position += new Vector3(0f, 16.5f, 0f);
 		// wait = true;
 		StartCoroutine (WAIT());
+		// panelhome.SetActive(true);
 	}
 
 	public void wYes(){
@@ -160,10 +163,10 @@ public class selectCh : MonoBehaviour {
 
 	IEnumerator WAIT(){
 		yield return new WaitForSeconds(1f);
-		if(!ishome)
-			panelImage.SetActive(true);			
-		else
-			panelhome.SetActive(true);
-		ishome = false;
+		// if(!ishome)
+		panelImage.SetActive(true);			
+		// else
+		// 	panelhome.SetActive(true);
+		// ishome = false;
 	}
 }
