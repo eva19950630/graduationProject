@@ -49,6 +49,8 @@ public class SecondText_lock : MonoBehaviour {
 				}
 				if (ti <= -60) {
 					isTimesup = true;
+					BossSave.timesup();
+					BossSave.setDamage();
 
 					bombAni.enabled = false;
 					wrongsymbol.SetActive(false);
@@ -62,6 +64,7 @@ public class SecondText_lock : MonoBehaviour {
 				if (ti <= -60.03f)
 					isTimesup = false;
 				if (ti <= -62) {
+					// BossSave.timesup();
 					game_mechanism.enterTeaching(gid);
 				}
 			} else {

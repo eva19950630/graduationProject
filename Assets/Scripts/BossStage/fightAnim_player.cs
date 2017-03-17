@@ -32,7 +32,7 @@ public class fightAnim_player : MonoBehaviour {
 			lifepoint_player = 1f;
 			lifepoint_boss = 1f;
 		}else{
-			print("in");
+			// print("in");
 			Player.SetBool("back",true);
 			lifebar_player.SetActive(true);
 			lifebar_boss.SetActive(true);		
@@ -102,6 +102,7 @@ public class fightAnim_player : MonoBehaviour {
 			StartCoroutine(reduceLife_boss());
 
 		}else{
+			// print(BossSave.damage);
 			StartCoroutine(reduceLife_player());
 			print("Damage!!!");
 		}
@@ -110,6 +111,7 @@ public class fightAnim_player : MonoBehaviour {
 	IEnumerator reduceLife_player(){
 
 		life_point = lifepoint_player;
+		// print(BossSave.damage);
 		lifepoint_player = (lifepoint_player-BossSave.damage);
 		print(lifepoint_player);
 

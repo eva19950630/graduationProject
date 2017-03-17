@@ -48,7 +48,9 @@ public class SecondText_fishing : MonoBehaviour {
 				}
 				if (ti <= -90) {
 					isTimesup = true;
-
+					BossSave.timesup();
+					BossSave.setDamage();
+					
 					clockAni.enabled = false;
 					clock_ori.SetActive(false);
 					wrongsymbol.SetActive(false);

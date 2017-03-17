@@ -49,7 +49,9 @@ public class SecondText_buying : MonoBehaviour {
 				}
 				if (ti <= -150) {
 					isTimesup = true;
-
+					BossSave.timesup();
+					BossSave.setDamage();
+					
 					wrongsymbol.SetActive(false);
 					secText.SetActive(false);
 					label2.SetActive(false);

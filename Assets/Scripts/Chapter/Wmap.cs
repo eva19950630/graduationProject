@@ -27,21 +27,21 @@ public class Wmap : MonoBehaviour {
 	public static string[] info = new string[5]
 	{
 		"",
-		"教學關卡\n遊戲操作說明都在這裡面\nSyuan is PIG",
-		"本關卡需要基本計算能力\n加減乘除及四則運算概念\nSyuan is PIG 1",
-		"本關卡需要基本計算能力\n加減乘除及四則運算概念\nSyuan is PIG 2",
+		"教學關卡\n◎關卡類型數量 : 3\n◎通關條件 : \"聯想\"",
+		"◎關卡類型數量 : 4\n◎基本運算規則、能力◎通關條件 : \"邏輯\"\n",
+		"◎關卡類型數量 : 5\n◎基本運算規則、能力\n◎擬題思考能力◎通關條件 : \"推理\"",
 		// "本關卡需要基本計算能力\n加減乘除及四則運算概念\nSyuan is PIG 3",
-		"BOSS STAGE\n需要絕對的四則能力\nSyuan is GOD PIG!"
+		"BOSS STAGE\n◎進階挑戰\n◎通關條件 : \"快速計算、精準計算\""
 	};
 
 	// Use this for initialization
 	void Start () {
 		info[0] = "";
-		info[1] = "教學關卡\n遊戲操作說明都在這裡面\nSyuan is PIG";
-		info[2] = "本關卡需要基本計算能力\n加減乘除及四則運算概念\nSyuan is PIG 1";
-		info[3] = "本關卡需要基本計算能力\n加減乘除及四則運算概念\nSyuan is PIG 2";
+		info[1] = "◎ 教學關卡\n◎ 關卡類型數量 : 3\n◎ 通關條件 : \"聯想\"";
+		info[2] = "◎ 關卡類型數量 : 4\n◎ 基本運算規則、能力\n◎ 通關條件 : \"邏輯\"\n";
+		info[3] = "◎ 關卡類型數量 : 5\n◎ 基本運算規則、能力\n◎ 擬題思考能力\n◎ 通關條件 : \"推理\"";
 		// info[3] = "本關卡需要基本計算能力\n加減乘除及四則運算概念\nSyuan is PIG 3";
-		info[4] = "BOSS STAGE\n需要絕對的四則能力\nSyuan is GOD PIG!";
+		info[4] = "BOSS STAGE\n◎ 進階挑戰\n◎ 通關條件 : \"快速計算、精準計算\"";
 	}
 	
 	// Update is called once per frame

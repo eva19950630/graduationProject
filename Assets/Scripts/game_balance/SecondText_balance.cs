@@ -49,6 +49,8 @@ public class SecondText_balance : MonoBehaviour {
 				}
 				if (ti <= -75) {
 					isTimesup = true;
+					BossSave.timesup();
+					BossSave.setDamage();
 
 					wrongsymbol.SetActive(false);
 					secText.SetActive(false);

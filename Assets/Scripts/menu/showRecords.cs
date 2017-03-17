@@ -25,7 +25,7 @@ public class showRecords : MonoBehaviour {
 		// print(username);
 		// data_block.text = username;
 		StartCoroutine(callRecord(username));
-		data_block.text = "";
+		// data_block.text = "";
 	}
 	
 	// Update is called once per frame
@@ -63,7 +63,11 @@ public class showRecords : MonoBehaviour {
 		else
 			corrext_wrong.text = "X";
 		// corrext_wrong.text = result[0];
-		user_Ans.text = userAnswers[0];
+
+		if(userAnswers[0] != "null")
+			user_Ans.text = userAnswers[RecordCount-1];
+		else
+			user_Ans.text = "未作答";
 
 		// print(www.text);
 	}
@@ -86,6 +90,9 @@ public class showRecords : MonoBehaviour {
 			corrext_wrong.text = "X";
 		// corrext_wrong.text = result[RecordCount-1];
 		// print()
-		user_Ans.text = userAnswers[RecordCount-1];
+		if(userAnswers[RecordCount-1] != "null")
+			user_Ans.text = userAnswers[RecordCount-1];
+		else
+			user_Ans.text = "未作答";			
 	}
 }

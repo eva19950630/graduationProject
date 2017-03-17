@@ -17,6 +17,8 @@ public class BossSave : MonoBehaviour {
 	//change state to back
 	public Animator Boss;
 	public Animator Player;
+	//check for time
+	public static bool time = false;
 
 	public static bool gamefinish = false;
 
@@ -55,13 +57,15 @@ public class BossSave : MonoBehaviour {
 		 	saver = this;
 		 	back = false;
 		 	gamefinish = false;
+		 	// time = false;
 		}
 
 	}
 
 	public static void setDamage(){
+		print(time);
 		if(gamenum == 1){
-			if(GameController_lock.k < 3){
+			if(GameController_lock.k < 3 && time == false){
 				// print(isdamage);
 				isdamage = true;
 				damage = 30-(GameController_lock.k*10);
@@ -70,7 +74,7 @@ public class BossSave : MonoBehaviour {
 				damage = 40;
 			}
 		}else if(gamenum == 2){
-			if(GameController_fishing.k < 3){
+			if(GameController_fishing.k < 3 && !time){
 				// print(isdamage);
 				isdamage = true;
 				damage = 30-(GameController_fishing.k*10);
@@ -79,7 +83,7 @@ public class BossSave : MonoBehaviour {
 				damage = 40;
 			}
 		}else if(gamenum == 3){
-			if(GameController_quickanswer.k < 3){
+			if(GameController_quickanswer.k < 3 && !time){
 				// print(isdamage);
 				isdamage = true;
 				damage = 30-(GameController_quickanswer.k*10);
@@ -88,7 +92,7 @@ public class BossSave : MonoBehaviour {
 				damage = 40;
 			}
 		}else if(gamenum == 4){
-			if(GameController_balance.k < 3){
+			if(GameController_balance.k < 3 && !time){
 				// print(isdamage);
 				isdamage = true;
 				damage = 30-(GameController_balance.k*10);
@@ -97,7 +101,7 @@ public class BossSave : MonoBehaviour {
 				damage = 40;
 			}
 		}else if(gamenum == 5){
-			if(GameController_buying.k < 3){
+			if(GameController_buying.k < 3 && !time){
 				// print(isdamage);
 				isdamage = true;
 				damage = 30-(GameController_buying.k*10);
@@ -107,6 +111,7 @@ public class BossSave : MonoBehaviour {
 			}
 		}
 		damage /= 100;
+		time = false;
 	}
 
 	public static void saved(){
@@ -121,5 +126,8 @@ public class BossSave : MonoBehaviour {
 
 	}
 
-
+	public static void timesup(){
+		time = true;
+		// print("timesupup");
+	}
 }

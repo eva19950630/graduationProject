@@ -61,6 +61,8 @@ public class SecondText_quickanswer : MonoBehaviour {
 				if (ti <= -90) {
 					isTimesup = true;
 					quick_isTimesup = true;
+					BossSave.timesup();
+					BossSave.setDamage();
 
 					wrongsymbol.SetActive(false);
 					secText.SetActive(false);
