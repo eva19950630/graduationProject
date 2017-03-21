@@ -1,12 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/BossStage.unity
-=======
-<<<<<<< HEAD
-- path: Assets/Scenes/WorldMap.unity
-=======
-- path: Assets/Scenes/login.unity
->>>>>>> fc3104e0f4567311c36f7347178eb1142a539490
->>>>>>> 6bdf4809ba2d603c180bdc4d442d25641348504a
+- path: Assets/Scenes/Game/BuyingScene.unity
   isLoaded: 1
   isActive: 1
