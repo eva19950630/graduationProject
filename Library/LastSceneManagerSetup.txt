@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/WorldMap.unity
+=======
+- path: Assets/Scenes/Game/BuyingScene.unity
+>>>>>>> f14d4eb9abdf6becaed81b7805ccca4c8ea43697
   isLoaded: 1
   isActive: 1
