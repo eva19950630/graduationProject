@@ -60,7 +60,7 @@ public class selectCh : MonoBehaviour {
 		button[3] = (button2.transform.position + new Vector3(0, 23f, 0));
 		button[4] = (button3.transform.position + new Vector3(0, 23f, 0));
 		//initial character position
-		player.transform.position = button[1];
+		player.transform.position = button[3];
 		// player.transform.position += new Vector3(0f, 16.5f, 0f);
 
 	}
@@ -86,10 +86,10 @@ public class selectCh : MonoBehaviour {
 	public void continueGame(){
 		panelhome.SetActive(false);
 		home.interactable = true;
-		button0.interactable = true;
-		button1.interactable = true;
+		// button0.interactable = true;
+		// button1.interactable = true;
 		button2.interactable = true;
-		button3.interactable = true;	
+		// button3.interactable = true;	
 	}
 
 	public void backtomenu(){
