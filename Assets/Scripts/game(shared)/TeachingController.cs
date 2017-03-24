@@ -80,19 +80,15 @@ public class TeachingController : MonoBehaviour {
 	}
 
 	IEnumerator waitingSec () {
-		yield return new WaitForSeconds(4f);
+		yield return new WaitForSeconds(6f);
 		qkindText.text = "";
 		isWait = false;
 	}
 
-	public void showWatchingAgainBtn () {
+	public void showBtn () {
 		watchagainBtn.SetActive(true);
-	}
-
-	public void showcontinueBtn () {
 		continueBtn.SetActive(true);
 	}
-
 
 	public void cilckShowWatchingAgain () {
 		isWait = true; 
