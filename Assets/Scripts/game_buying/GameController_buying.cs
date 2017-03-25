@@ -50,6 +50,10 @@ public class GameController_buying : MonoBehaviour {
 
 		if(Input.GetKeyDown(KeyCode.Escape))
 			Application.Quit();
+
+		pigero_Text.text = ""+pigero_count;
+		pigdy_Text.text = ""+pigdy_count;
+		lollipig_Text.text = ""+lollipig_count;
 	}
 
 	public void clickStartGame () {
