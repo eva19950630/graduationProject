@@ -291,7 +291,7 @@ public class Map1_1 : MonoBehaviour {
 	}
 
 	public static void showPrompt_clue(){
-		Debug.Log("show get Clue Prompt.");
+		// Debug.Log("show get Clue Prompt.");
 		promptShow = false;
 	}
 

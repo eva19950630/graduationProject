@@ -109,6 +109,7 @@ public class gameventIII : MonoBehaviour {
 
 		if(Map1_2.promptShow)
 			GetCluePrompt.SetActive(true);
+			// Map1_2.showPrompt_clue();
 		else
 			GetCluePrompt.SetActive(false);
 
@@ -248,7 +249,7 @@ public class gameventIII : MonoBehaviour {
 				goNext = true;
 			}else{
 				// get ?A?B prompt
-				prompt_for_wrong.text = ans + "\n答案已經記錄到\"提示\"之中\n點選左上角燈泡圖示確認。";
+				prompt_for_wrong.text = ans + "\n答案已經記錄到\"提示\"之中\n點選燈泡圖示可以查看。";
 				wrongPanel.SetActive(true);
 			}
 		}
@@ -390,10 +391,10 @@ public class gameventIII : MonoBehaviour {
     	exit_panel.SetActive(false);    	
     }
 
-    // public void closePrompt(){
-    // 	GetCluePrompt.SetActive(false);
-    // 	Map1_2.showPrompt_clue();
-    // }
+    public void closePrompt(){
+    	GetCluePrompt.SetActive(false);
+    	Map1_2.showPrompt_clue();
+    }
 
     public void GameEnd(int ans){
     	if(ans == 1)

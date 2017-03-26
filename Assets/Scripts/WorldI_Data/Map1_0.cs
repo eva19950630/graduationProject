@@ -40,19 +40,19 @@ public class Map1_0 : MonoBehaviour {
 	public Sprite sprite_lock;
 	public Sprite sprite_fish;
 	public Sprite sprite_paper;
-	//sign position (stop position with 0.55f in y)
+	//sign position (stop position with 2f in y)
 	public static Vector3[] world1_stop = new [] 
 	{
-		new Vector3(-5f,0.55f,-5f),
-		new Vector3(-5f,0.55f,0f),
-		new Vector3(-5f,0.55f,5f),
-		new Vector3(0f,0.55f,5f),
-		new Vector3(5f,0.55f,5f),
-		new Vector3(10f,0.55f,5f),
-		new Vector3(10f,0.55f,0f),
-		new Vector3(10f,0.55f,-5f),
-		new Vector3(5f,0.55f,-5f),
-		new Vector3(0f,0.55f,-5f),
+		new Vector3(-5f,2f,-5f),
+		new Vector3(-5f,2f,0f),
+		new Vector3(-5f,2f,5f),
+		new Vector3(0f,2f,5f),
+		new Vector3(5f,2f,5f),
+		new Vector3(10f,2f,5f),
+		new Vector3(10f,2f,0f),
+		new Vector3(10f,2f,-5f),
+		new Vector3(5f,2f,-5f),
+		new Vector3(0f,2f,-5f),
 
 	};
 	//Material for change
@@ -199,7 +199,7 @@ public class Map1_0 : MonoBehaviour {
 		for(i = 0; i <= 9; i++){
 			//print(i + ":" + world1_game[i]);
 			if(world1_game[i] != -1){
-				signClone = Instantiate(sign_prefab, world1_stop[i], Quaternion.Euler(90, 0, 0)) as GameObject;
+				signClone = Instantiate(sign_prefab, world1_stop[i], Quaternion.identity/*Quaternion.Euler(90, 0, 0)*/) as GameObject;
 				if(world1_game[i] == 1 && signClone!= null){
 					signClone.GetComponent<SpriteRenderer>().sprite = sprite_lock;
 					world1_floor[i].GetComponent<Renderer>().material = material_lock;

@@ -312,6 +312,7 @@ public class Map1_2 : MonoBehaviour {
 
 	public static void getclue(){
 		chance_times ++;
+		promptShow = true;
 	}
 
 	public static void showPrompt_clue(){
